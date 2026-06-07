@@ -1,8 +1,19 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
+{%- liquid
+  assign language_code = request.locale.iso_code | default: 'ar'
+  assign primary_language = language_code | split: '-' | first | downcase
+  assign rtl_languages = 'ar,fa,he,ur' | split: ','
+  assign text_direction = 'ltr'
+
+  if rtl_languages contains primary_language
+    assign text_direction = 'rtl'
+  endif
+-%}
+<html lang="{{ language_code }}" dir="{{ text_direction }}">
   <head>
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
+    {% render 'flexora-design-tokens' %}
 
     {% comment %}
       Font preloading:
@@ -19,6 +30,7 @@
 
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'flexora-base.css' | asset_url | stylesheet_tag }}
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
@@ -26,10 +38,12 @@
     {{ content_for_header }}
   </head>
 
-  <body>
+  <body class="fx-theme fx-dir-{{ text_direction }} fx-lang-{{ primary_language }} template-{{ request.page_type | handle }}">
     {% sections 'header-group' %}
 
-    {{ content_for_layout }}
+    <main id="MainContent">
+      {{ content_for_layout }}
+    </main>
 
     {% sections 'footer-group' %}
   </body>

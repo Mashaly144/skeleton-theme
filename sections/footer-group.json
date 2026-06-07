@@ -12,10 +12,23 @@
   "name": "t:general.footer",
   "sections": {
     "footer": {
-      "type": "footer",
+      "type": "flexora-footer",
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
+        "logo_width": 140,
+        "menu": "footer",
+        "secondary_menu": "",
+        "show_social": true,
+        "show_newsletter": true,
+        "show_payment_icons": true,
+        "show_language_selector": true,
+        "show_country_selector": true,
+        "show_copyright": true,
+        "custom_copyright": "",
+        "footer_layout": "columns",
+        "background_color": "#F4F6F5",
+        "text_color": "#1F2933",
+        "show_border": true,
+        "mobile_accordion": true
       }
     }
   },

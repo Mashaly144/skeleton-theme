@@ -1,0 +1,87 @@
+{% doc %}
+  Renders configured Flexora social links.
+
+  @param {string} [classes] - Additional CSS classes
+  @param {boolean} [show_labels] - Shows platform names beside icons
+  @param {string} [icon_style] - outline or solid
+  @param {string} [size] - small, medium, or large
+
+  @example
+  {% render 'flexora-social-links', show_labels: false, size: 'medium' %}
+{% enddoc %}
+
+{%- liquid
+  assign social_size = size | default: 'medium'
+  assign allowed_sizes = 'small,medium,large' | split: ','
+  unless allowed_sizes contains social_size
+    assign social_size = 'medium'
+  endunless
+
+  assign social_icon_style = icon_style | default: 'outline'
+  unless social_icon_style == 'solid'
+    assign social_icon_style = 'outline'
+  endunless
+
+  assign has_social_links = false
+  if settings.fx_social_facebook_url != blank or settings.fx_social_instagram_url != blank or settings.fx_social_tiktok_url != blank or settings.fx_social_x_url != blank or settings.fx_social_youtube_url != blank or settings.fx_social_snapchat_url != blank or settings.fx_social_pinterest_url != blank or settings.fx_social_linkedin_url != blank or settings.fx_social_whatsapp_url != blank
+    assign has_social_links = true
+  endif
+-%}
+
+{% if has_social_links %}
+  <ul class="fx-social-links fx-social-links--{{ social_size }} fx-social-links--{{ social_icon_style }}{% if classes != blank %} {{ classes | escape }}{% endif %}" role="list">
+    {%- assign social_platforms = 'facebook,instagram,tiktok,x,youtube,snapchat,pinterest,linkedin,whatsapp' | split: ',' -%}
+    {% for platform in social_platforms %}
+      {%- liquid
+        case platform
+          when 'facebook'
+            assign social_url = settings.fx_social_facebook_url
+            assign social_mark = 'f'
+          when 'instagram'
+            assign social_url = settings.fx_social_instagram_url
+            assign social_mark = 'i'
+          when 'tiktok'
+            assign social_url = settings.fx_social_tiktok_url
+            assign social_mark = 't'
+          when 'x'
+            assign social_url = settings.fx_social_x_url
+            assign social_mark = 'x'
+          when 'youtube'
+            assign social_url = settings.fx_social_youtube_url
+            assign social_mark = 'y'
+          when 'snapchat'
+            assign social_url = settings.fx_social_snapchat_url
+            assign social_mark = 's'
+          when 'pinterest'
+            assign social_url = settings.fx_social_pinterest_url
+            assign social_mark = 'p'
+          when 'linkedin'
+            assign social_url = settings.fx_social_linkedin_url
+            assign social_mark = 'in'
+          when 'whatsapp'
+            assign social_url = settings.fx_social_whatsapp_url
+            assign social_mark = 'w'
+        endcase
+
+        assign social_label_key = 'flexora.social.' | append: platform
+      -%}
+
+      {% if social_url != blank %}
+        <li>
+          <a
+            class="fx-social-links__link"
+            href="{{ social_url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="{{ social_label_key | t }}"
+          >
+            <span class="fx-social-links__icon" aria-hidden="true">{{ social_mark | upcase }}</span>
+            {% if show_labels %}
+              <span>{{ social_label_key | t }}</span>
+            {% endif %}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}

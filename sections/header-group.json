@@ -11,12 +11,40 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
+    "announcement": {
+      "type": "flexora-announcement-bar",
+      "settings": {
+        "enabled": true,
+        "text": "",
+        "alignment": "center",
+        "text_size": "small",
+        "background_color": "#2F5D50",
+        "text_color": "#FFFFFF",
+        "show_mobile": true,
+        "show_desktop": true,
+        "show_close": false
+      }
+    },
     "header": {
-      "type": "header",
-      "settings": {}
+      "type": "flexora-header",
+      "settings": {
+        "logo_width": 140,
+        "main_menu": "main-menu",
+        "header_layout": "logo-start-menu-center",
+        "sticky_header": "none",
+        "show_search": true,
+        "show_account": true,
+        "show_cart_count": true,
+        "show_language_selector": true,
+        "enable_transparent_header": false,
+        "background_color": "#FFFFFF",
+        "text_color": "#111827",
+        "show_border": true
+      }
     }
   },
   "order": [
+    "announcement",
     "header"
-  ],
+  ]
 }

@@ -1,0 +1,564 @@
+{
+  "general": {
+    "404": "Not found",
+    "article": "Article",
+    "block": "Block",
+    "blog": "Blog",
+    "cart": "Cart",
+    "collection": "Collection",
+    "collections": "Collections",
+    "collection_card": "Collection card",
+    "collections_grid": "Collections grid",
+    "colors": "Colors",
+    "column": "Column",
+    "content": "Content",
+    "custom_section": "Custom section",
+    "fonts": "Fonts",
+    "footer": "Footer",
+    "group": "Group",
+    "header": "Header",
+    "layout": "Layout",
+    "main": "Main",
+    "page": "Page",
+    "password": "Password",
+    "primary": "Primary",
+    "product": "Product",
+    "row": "Row",
+    "search": "Search",
+    "secondary": "Secondary",
+    "section": "Section",
+    "settings": "Settings",
+    "sidebar": "Sidebar",
+    "text": "Text",
+    "theme": "Theme",
+    "typography": "Typography"
+  },
+  "labels": {
+    "alignment": "Alignment",
+    "background": "Background",
+    "foreground": "Foreground",
+    "grid_gap": "Grid spacing",
+    "grid_item_width": "Grid item width",
+    "input_corner_radius": "Input corner radius",
+    "layout_direction": "Layout direction",
+    "menu": "Menu",
+    "customer_account_menu": "Customer account menu",
+    "padding": "Padding",
+    "page_margin": "Page margin",
+    "page_width": "Page width",
+    "show_payment_icons": "Show payment icons",
+    "text_style": "Text style",
+    "text": "Text"
+  },
+  "options": {
+    "alignment": {
+      "left": "Left",
+      "center": "Center",
+      "right": "Right"
+    },
+    "direction": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertical"
+    },
+    "page_width": {
+      "narrow": "Narrow",
+      "wide": "Wide"
+    },
+    "size": {
+      "large": "Large",
+      "small": "Small"
+    },
+    "text_style": {
+      "title": "Title",
+      "subtitle": "Subtitle",
+      "normal": "Normal text"
+    }
+  },
+  "flexora": {
+    "design_system": "Flexora design system",
+    "colors": "Colors",
+    "background": "Background",
+    "text": "Text",
+    "heading": "Headings",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "accent": "Accent",
+    "border": "Borders",
+    "layout": "Layout",
+    "page_width": "Page width",
+    "width_compact": "Compact",
+    "width_standard": "Standard",
+    "width_wide": "Wide",
+    "section_spacing_desktop": "Desktop section spacing",
+    "section_spacing_mobile": "Mobile section spacing",
+    "style": "Style",
+    "radius_small": "Small corner radius",
+    "radius_medium": "Medium corner radius",
+    "radius_large": "Large corner radius",
+    "enable_shadows": "Enable shadows",
+    "animation_level": "Animation level",
+    "animation_none": "None",
+    "animation_subtle": "Subtle",
+    "animation_standard": "Standard",
+    "ui_primitives": "UI primitives",
+    "button_radius": "Button corner radius",
+    "button_style": "Default button style",
+    "button_primary": "Primary",
+    "button_secondary": "Secondary",
+    "button_outline": "Outline",
+    "button_ghost": "Ghost",
+    "card_style": "Default card style",
+    "card_soft": "Soft",
+    "card_bordered": "Bordered",
+    "card_shadow": "Shadow",
+    "focus_style": "Focus outline color",
+    "focus_accent": "Accent",
+    "focus_primary": "Primary",
+    "focus_dark": "Dark"
+  },
+  "sections": {
+    "flexora_announcement_bar": {
+      "name": "Flexora announcement bar",
+      "settings": {
+        "enabled": {
+          "label": "Enable announcement bar"
+        },
+        "text": {
+          "label": "Announcement text"
+        },
+        "secondary_text": {
+          "label": "Secondary announcement text",
+          "info": "Reserved for a future rotating announcement option."
+        },
+        "link": {
+          "label": "Link"
+        },
+        "alignment": {
+          "label": "Alignment"
+        },
+        "text_size": {
+          "label": "Text size"
+        },
+        "background_color": {
+          "label": "Background color"
+        },
+        "text_color": {
+          "label": "Text color"
+        },
+        "show_mobile": {
+          "label": "Show on mobile"
+        },
+        "show_desktop": {
+          "label": "Show on desktop"
+        },
+        "show_close": {
+          "label": "Show close button"
+        }
+      },
+      "options": {
+        "alignment": {
+          "start": "Start",
+          "center": "Center",
+          "end": "End"
+        },
+        "text_size": {
+          "small": "Small",
+          "medium": "Medium"
+        }
+      }
+    },
+    "flexora_header": {
+      "name": "Flexora header",
+      "settings": {
+        "logo": {
+          "label": "Logo"
+        },
+        "logo_width": {
+          "label": "Logo width"
+        },
+        "main_menu": {
+          "label": "Main menu"
+        },
+        "layout": {
+          "label": "Header layout"
+        },
+        "sticky": {
+          "label": "Sticky header"
+        },
+        "show_search": {
+          "label": "Show search"
+        },
+        "show_account": {
+          "label": "Show account"
+        },
+        "show_cart_count": {
+          "label": "Show cart count"
+        },
+        "show_language_selector": {
+          "label": "Show language selector"
+        },
+        "enable_transparent_header": {
+          "label": "Enable transparent header"
+        },
+        "background_color": {
+          "label": "Background color"
+        },
+        "text_color": {
+          "label": "Text color"
+        },
+        "show_border": {
+          "label": "Show bottom border"
+        }
+      },
+      "options": {
+        "layout": {
+          "logo_start_menu_center": "Logo start, menu center",
+          "logo_center_menu_start": "Logo center, menu start",
+          "logo_center_menu_below": "Logo center, menu below"
+        },
+        "sticky": {
+          "none": "None",
+          "on_scroll_up": "On scroll up",
+          "always": "Always"
+        }
+      }
+    },
+    "flexora_footer": {
+      "name": "Flexora footer",
+      "settings": {
+        "logo": {
+          "label": "Logo"
+        },
+        "logo_width": {
+          "label": "Logo width"
+        },
+        "description": {
+          "label": "Description"
+        },
+        "menu": {
+          "label": "Footer menu"
+        },
+        "secondary_menu": {
+          "label": "Secondary menu"
+        },
+        "show_social": {
+          "label": "Show social links"
+        },
+        "show_newsletter": {
+          "label": "Show newsletter"
+        },
+        "show_payment_icons": {
+          "label": "Show payment icons"
+        },
+        "show_language_selector": {
+          "label": "Show language selector"
+        },
+        "show_country_selector": {
+          "label": "Show country selector"
+        },
+        "show_copyright": {
+          "label": "Show copyright"
+        },
+        "custom_copyright": {
+          "label": "Custom copyright text"
+        },
+        "layout": {
+          "label": "Footer layout"
+        },
+        "background_color": {
+          "label": "Background color"
+        },
+        "text_color": {
+          "label": "Text color"
+        },
+        "show_border": {
+          "label": "Show top border"
+        },
+        "mobile_accordion": {
+          "label": "Use menu accordions on mobile"
+        }
+      },
+      "options": {
+        "layout": {
+          "simple": "Simple",
+          "columns": "Columns",
+          "newsletter_first": "Newsletter first"
+        }
+      }
+    },
+    "flexora_hero": {
+      "name": "Flexora hero",
+      "settings": {
+        "section_height": {
+          "label": "Section height",
+          "options": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large",
+            "fullscreen": "Full screen"
+          }
+        },
+        "desktop_content_position": { "label": "Desktop content position" },
+        "mobile_content_position": { "label": "Mobile content position" },
+        "content_width": { "label": "Content width" },
+        "text_alignment": { "label": "Text alignment" },
+        "overlay_opacity": { "label": "Overlay opacity" },
+        "text_color": { "label": "Text color" },
+        "overlay_color": { "label": "Overlay color" },
+        "button_style": { "label": "Primary button style" },
+        "enable_autoplay": { "label": "Enable autoplay" },
+        "autoplay_speed": { "label": "Autoplay speed" },
+        "show_arrows": { "label": "Show arrows" },
+        "show_dots": { "label": "Show dots" },
+        "pause_on_hover": { "label": "Pause on hover" },
+        "enable_parallax": { "label": "Enable subtle parallax" },
+        "mobile_stack_content": { "label": "Stack content below image on mobile" },
+        "show_scroll_indicator": { "label": "Show scroll indicator" }
+      },
+      "options": {
+        "position": {
+          "inherit": "Use section setting",
+          "start": "Start",
+          "center": "Center",
+          "end": "End"
+        },
+        "content_width": {
+          "narrow": "Narrow",
+          "medium": "Medium",
+          "wide": "Wide"
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "Slide",
+          "settings": {
+            "image": { "label": "Desktop image" },
+            "mobile_image": { "label": "Mobile image" },
+            "eyebrow": { "label": "Eyebrow" },
+            "heading": { "label": "Heading" },
+            "text": { "label": "Text" },
+            "primary_button_label": { "label": "Primary button label" },
+            "primary_button_link": { "label": "Primary button link" },
+            "secondary_button_label": { "label": "Secondary button label" },
+            "secondary_button_link": { "label": "Secondary button link" },
+            "badge_text": { "label": "Badge text" },
+            "content_position": { "label": "Content position" },
+            "text_color": { "label": "Text color override" },
+            "overlay_opacity": { "label": "Overlay opacity override" }
+          }
+        }
+      }
+    },
+    "flexora_collection_cards": {
+      "name": "Flexora collection cards",
+      "settings": {
+        "eyebrow": { "label": "Eyebrow" },
+        "heading": { "label": "Heading" },
+        "text": { "label": "Text" },
+        "heading_alignment": { "label": "Heading alignment" },
+        "layout": {
+          "label": "Layout",
+          "options": {
+            "grid": "Grid",
+            "carousel": "Carousel",
+            "masonry_like": "Featured grid"
+          }
+        },
+        "cards_per_row_desktop": { "label": "Cards per row on desktop" },
+        "cards_per_row_tablet": { "label": "Cards per row on tablet" },
+        "cards_per_row_mobile": { "label": "Cards per row on mobile" },
+        "image_ratio": {
+          "label": "Image ratio",
+          "options": {
+            "square": "Square",
+            "portrait": "Portrait",
+            "landscape": "Landscape",
+            "wide": "Wide",
+            "natural": "Natural"
+          }
+        },
+        "card_style": {
+          "label": "Card style",
+          "options": {
+            "soft": "Soft",
+            "bordered": "Bordered",
+            "shadow": "Shadow",
+            "overlay": "Overlay",
+            "minimal": "Minimal"
+          }
+        },
+        "text_position": {
+          "label": "Text position",
+          "options": {
+            "below_image": "Below image",
+            "overlay_start": "Overlay at start",
+            "overlay_center": "Overlay at center",
+            "overlay_end": "Overlay at end"
+          }
+        },
+        "show_collection_count": { "label": "Show product count" },
+        "show_button": { "label": "Show card button" },
+        "button_label": { "label": "Default card button label" },
+        "button_style": { "label": "Card button style" },
+        "enable_mobile_scroll": { "label": "Enable horizontal scroll on mobile" },
+        "show_arrows": { "label": "Show navigation arrows" },
+        "show_view_all": { "label": "Show view-all button" },
+        "view_all_label": { "label": "View-all button label" },
+        "view_all_link": { "label": "View-all link" },
+        "section_spacing": { "label": "Section spacing" },
+        "background_color": { "label": "Background color" },
+        "text_color": { "label": "Text color" }
+      },
+      "options": {
+        "position": {
+          "start": "Start",
+          "center": "Center",
+          "end": "End"
+        },
+        "spacing": {
+          "small": "Small",
+          "medium": "Medium",
+          "large": "Large"
+        },
+        "image_position": {
+          "center": "Center",
+          "top": "Top",
+          "bottom": "Bottom"
+        }
+      },
+      "blocks": {
+        "collection_card": {
+          "name": "Collection card",
+          "settings": {
+            "collection": { "label": "Collection" },
+            "custom_image": { "label": "Custom image" },
+            "custom_title": { "label": "Custom title" },
+            "custom_text": { "label": "Custom text" },
+            "custom_link": { "label": "Custom link" },
+            "badge_text": { "label": "Badge text" },
+            "button_label": { "label": "Button label" },
+            "image_position": { "label": "Image position" },
+            "featured": { "label": "Feature this card" }
+          }
+        }
+      }
+    },
+    "flexora_featured_collection": {
+      "name": "Flexora featured collection",
+      "settings": {
+        "collection": { "label": "Collection" },
+        "eyebrow": { "label": "Eyebrow" },
+        "heading": { "label": "Heading" },
+        "text": { "label": "Text" },
+        "heading_alignment": { "label": "Heading alignment" },
+        "layout": {
+          "label": "Layout",
+          "options": {
+            "grid": "Grid",
+            "carousel": "Carousel"
+          }
+        },
+        "products_to_show": { "label": "Products to show" },
+        "columns_desktop": { "label": "Columns on desktop" },
+        "columns_tablet": { "label": "Columns on tablet" },
+        "columns_mobile": { "label": "Columns on mobile" },
+        "image_ratio": { "label": "Image ratio" },
+        "card_style": { "label": "Card style" },
+        "show_vendor": { "label": "Show vendor" },
+        "show_price": { "label": "Show price" },
+        "show_badges": { "label": "Show badges" },
+        "show_secondary_image": { "label": "Show secondary image" },
+        "show_quick_add": { "label": "Show quick add" },
+        "show_swatches": { "label": "Show color indicators" },
+        "show_view_all": { "label": "Show view-all button" },
+        "view_all_label": { "label": "View-all button label" },
+        "button_style": { "label": "Button style" },
+        "enable_mobile_scroll": { "label": "Enable horizontal scroll on mobile" },
+        "show_arrows": { "label": "Show carousel arrows" },
+        "section_spacing": { "label": "Section spacing" },
+        "background_color": { "label": "Background color" },
+        "text_color": { "label": "Text color" }
+      },
+      "options": {
+        "position": {
+          "start": "Start",
+          "center": "Center",
+          "end": "End"
+        },
+        "image_ratio": {
+          "square": "Square",
+          "portrait": "Portrait",
+          "landscape": "Landscape",
+          "natural": "Natural"
+        },
+        "card_style": {
+          "soft": "Soft",
+          "bordered": "Bordered",
+          "shadow": "Shadow",
+          "minimal": "Minimal"
+        },
+        "button_style": {
+          "primary": "Primary",
+          "secondary": "Secondary",
+          "outline": "Outline",
+          "ghost": "Ghost"
+        },
+        "spacing": {
+          "small": "Small",
+          "medium": "Medium",
+          "large": "Large"
+        }
+      }
+    }
+  },
+  "settings": {
+    "flexora_social": {
+      "name": "Flexora social media",
+      "facebook": {
+        "label": "Facebook URL"
+      },
+      "instagram": {
+        "label": "Instagram URL"
+      },
+      "tiktok": {
+        "label": "TikTok URL"
+      },
+      "x": {
+        "label": "X URL"
+      },
+      "youtube": {
+        "label": "YouTube URL"
+      },
+      "snapchat": {
+        "label": "Snapchat URL"
+      },
+      "pinterest": {
+        "label": "Pinterest URL"
+      },
+      "linkedin": {
+        "label": "LinkedIn URL"
+      },
+      "whatsapp": {
+        "label": "WhatsApp URL"
+      }
+    },
+    "flexora_newsletter": {
+      "name": "Flexora newsletter",
+      "enabled": {
+        "label": "Enable newsletter"
+      },
+      "heading": {
+        "label": "Heading"
+      },
+      "text": {
+        "label": "Text"
+      },
+      "button_label": {
+        "label": "Button label"
+      },
+      "success_message": {
+        "label": "Success message"
+      }
+    }
+  }
+}

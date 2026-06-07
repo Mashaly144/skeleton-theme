@@ -1,0 +1,263 @@
+{%- liquid
+  assign announcement_id = 'FlexoraAnnouncement-' | append: section.id
+  assign visibility_class = ''
+
+  unless section.settings.show_mobile
+    assign visibility_class = visibility_class | append: ' fx-announcement--hide-mobile'
+  endunless
+
+  unless section.settings.show_desktop
+    assign visibility_class = visibility_class | append: ' fx-announcement--hide-desktop'
+  endunless
+-%}
+
+{% if section.settings.enabled and section.settings.text != blank %}
+  <aside
+    id="{{ announcement_id }}"
+    class="fx-announcement fx-announcement--{{ section.settings.alignment }} fx-announcement--{{ section.settings.text_size }}{{ visibility_class }}"
+    style="--fx-announcement-background: {{ section.settings.background_color }}; --fx-announcement-color: {{ section.settings.text_color }};"
+    aria-label="{{ 'flexora.announcement.label' | t }}"
+    data-flexora-announcement="{{ section.id }}"
+  >
+    <div class="fx-announcement__inner">
+      <div class="fx-announcement__content">
+        {% if section.settings.link != blank %}
+          <a class="fx-announcement__link" href="{{ section.settings.link }}">
+            {{ section.settings.text | escape }}
+          </a>
+        {% else %}
+          <p class="fx-announcement__text">{{ section.settings.text | escape }}</p>
+        {% endif %}
+      </div>
+
+      {% if section.settings.show_close %}
+        <button
+          class="fx-announcement__close"
+          type="button"
+          aria-label="{{ 'flexora.announcement.close' | t }}"
+          data-flexora-announcement-close
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      {% endif %}
+    </div>
+  </aside>
+{% endif %}
+
+{% stylesheet %}
+  .fx-announcement {
+    grid-column: 1 / -1;
+    width: 100%;
+    background: var(--fx-announcement-background);
+    color: var(--fx-announcement-color);
+  }
+
+  .fx-announcement__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    width: min(100% - 2rem, var(--fx-page-width));
+    min-height: 2.5rem;
+    margin-inline: auto;
+    padding-block: 0.5rem;
+  }
+
+  .fx-announcement__content {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .fx-announcement--start .fx-announcement__content {
+    text-align: start;
+  }
+
+  .fx-announcement--end .fx-announcement__content {
+    text-align: end;
+  }
+
+  .fx-announcement__text {
+    margin: 0;
+  }
+
+  .fx-announcement__link {
+    color: inherit;
+    text-decoration-color: currentcolor;
+    text-underline-offset: 0.2em;
+  }
+
+  .fx-announcement--small {
+    font-size: 0.8125rem;
+  }
+
+  .fx-announcement--medium {
+    font-size: 0.9375rem;
+  }
+
+  .fx-announcement__close {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--fx-radius-small);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .fx-announcement__link:focus-visible,
+  .fx-announcement__close:focus-visible {
+    outline: 2px solid currentcolor;
+    outline-offset: 2px;
+  }
+
+  .fx-announcement--hide-mobile {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .fx-announcement--hide-mobile {
+      display: block;
+    }
+
+    .fx-announcement--hide-desktop {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const announcements = document.querySelectorAll('[data-flexora-announcement]');
+
+    announcements.forEach((announcement) => {
+      const storageKey = `flexora-announcement-${announcement.dataset.flexoraAnnouncement}`;
+
+      try {
+        if (window.sessionStorage.getItem(storageKey) === 'dismissed') {
+          announcement.hidden = true;
+          return;
+        }
+      } catch (error) {}
+
+      const closeButton = announcement.querySelector('[data-flexora-announcement-close]');
+
+      closeButton?.addEventListener('click', () => {
+        announcement.hidden = true;
+
+        try {
+          window.sessionStorage.setItem(storageKey, 'dismissed');
+        } catch (error) {}
+      });
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.flexora_announcement_bar.name",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "t:sections.flexora_announcement_bar.settings.enabled.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:sections.flexora_announcement_bar.settings.text.label"
+    },
+    {
+      "type": "text",
+      "id": "secondary_text",
+      "label": "t:sections.flexora_announcement_bar.settings.secondary_text.label",
+      "info": "t:sections.flexora_announcement_bar.settings.secondary_text.info"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.flexora_announcement_bar.settings.link.label"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:sections.flexora_announcement_bar.settings.alignment.label",
+      "options": [
+        {
+          "value": "start",
+          "label": "t:sections.flexora_announcement_bar.options.alignment.start"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.flexora_announcement_bar.options.alignment.center"
+        },
+        {
+          "value": "end",
+          "label": "t:sections.flexora_announcement_bar.options.alignment.end"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "t:sections.flexora_announcement_bar.settings.text_size.label",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.flexora_announcement_bar.options.text_size.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.flexora_announcement_bar.options.text_size.medium"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.flexora_announcement_bar.settings.background_color.label",
+      "default": "#2F5D50"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.flexora_announcement_bar.settings.text_color.label",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile",
+      "label": "t:sections.flexora_announcement_bar.settings.show_mobile.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_desktop",
+      "label": "t:sections.flexora_announcement_bar.settings.show_desktop.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close",
+      "label": "t:sections.flexora_announcement_bar.settings.show_close.label",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.flexora_announcement_bar.name"
+    }
+  ]
+}
+{% endschema %}

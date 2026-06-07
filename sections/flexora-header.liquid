@@ -1,0 +1,622 @@
+{%- liquid
+  assign header_id = 'FlexoraHeader-' | append: section.id
+  assign logo_alt = section.settings.logo.alt | default: shop.name
+  assign logo_render_width = section.settings.logo_width | times: 2
+-%}
+
+<header
+  id="{{ header_id }}"
+  class="fx-site-header fx-site-header--{{ section.settings.header_layout }} fx-site-header--sticky-{{ section.settings.sticky_header }}{% if section.settings.enable_transparent_header %} fx-site-header--transparent{% endif %}{% if section.settings.show_border %} fx-site-header--bordered{% endif %}"
+  style="--fx-header-background: {{ section.settings.background_color }}; --fx-header-color: {{ section.settings.text_color }}; --fx-logo-width: {{ section.settings.logo_width }}px;"
+  role="banner"
+  data-flexora-header
+  data-sticky-mode="{{ section.settings.sticky_header }}"
+>
+  <div class="fx-site-header__inner">
+    <details class="fx-site-header__mobile-menu">
+      <summary
+        class="fx-site-header__action"
+        aria-label="{{ 'flexora.header.open_menu' | t }}"
+        aria-controls="{{ header_id }}-drawer"
+      >
+        <span class="fx-site-header__menu-icon" aria-hidden="true"></span>
+        <span class="fx-visually-hidden">{{ 'flexora.header.menu' | t }}</span>
+      </summary>
+
+      <div id="{{ header_id }}-drawer" class="fx-site-header__drawer">
+        <div class="fx-site-header__drawer-heading">
+          <span>{{ 'flexora.header.menu' | t }}</span>
+          <button
+            class="fx-site-header__drawer-close"
+            type="button"
+            aria-label="{{ 'flexora.header.close_menu' | t }}"
+            data-flexora-menu-close
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        {% if section.settings.main_menu != blank %}
+          <nav aria-label="{{ 'flexora.header.menu' | t }}">
+            <ul class="fx-site-header__drawer-list" role="list">
+              {% for link in section.settings.main_menu.links %}
+                <li>
+                  <a class="fx-site-header__drawer-link" href="{{ link.url }}">
+                    {{ link.title | escape }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        {% endif %}
+      </div>
+    </details>
+
+    <a class="fx-site-header__logo" href="{{ routes.root_url }}">
+      {% if section.settings.logo != blank %}
+        {{
+          section.settings.logo
+          | image_url: width: logo_render_width
+          | image_tag:
+            widths: '120, 180, 240, 320, 400, 480',
+            width: section.settings.logo_width,
+            alt: logo_alt,
+            loading: 'eager'
+        }}
+      {% else %}
+        <span>{{ shop.name | escape }}</span>
+      {% endif %}
+    </a>
+
+    {% if section.settings.main_menu != blank %}
+      <nav class="fx-site-header__nav" aria-label="{{ 'flexora.header.menu' | t }}">
+        <ul class="fx-site-header__nav-list" role="list">
+          {% for link in section.settings.main_menu.links %}
+            <li>
+              <a
+                class="fx-site-header__nav-link{% if link.current %} is-active{% endif %}"
+                href="{{ link.url }}"
+                {% if link.current %}
+                  aria-current="page"
+                {% endif %}
+              >
+                {{ link.title | escape }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endif %}
+
+    <div class="fx-site-header__actions">
+      {% if section.settings.show_language_selector and localization.available_languages.size > 1 %}
+        {% form 'localization', class: 'fx-site-header__localization' %}
+          <label class="fx-visually-hidden" for="{{ header_id }}-language">
+            {{ 'flexora.header.language' | t }}
+          </label>
+          <select
+            id="{{ header_id }}-language"
+            class="fx-site-header__language-select"
+            name="locale_code"
+            onchange="this.form.submit()"
+          >
+            {% for language in localization.available_languages %}
+              <option
+                value="{{ language.iso_code }}"
+                lang="{{ language.iso_code }}"
+                {% if language.iso_code == localization.language.iso_code %}
+                  selected
+                {% endif %}
+              >
+                {{ language.endonym_name | capitalize }}
+              </option>
+            {% endfor %}
+          </select>
+        {% endform %}
+      {% endif %}
+
+      {% if section.settings.show_search %}
+        <a class="fx-site-header__action" href="{{ routes.search_url }}" aria-label="{{ 'flexora.header.search' | t }}">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+            <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.75"></circle>
+            <path d="m16 16 4 4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></path>
+          </svg>
+        </a>
+      {% endif %}
+
+      {% if section.settings.show_account and shop.customer_accounts_enabled %}
+        <a
+          class="fx-site-header__action"
+          href="{{ routes.account_url }}"
+          aria-label="{{ 'flexora.header.account' | t }}"
+        >
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+      {% endif %}
+
+      <a class="fx-site-header__action fx-site-header__cart" href="{{ routes.cart_url }}" aria-label="{{ 'flexora.header.cart_count' | t: count: cart.item_count }}">
+        {{ 'icon-cart.svg' | inline_asset_content }}
+        {% if section.settings.show_cart_count and cart.item_count > 0 %}
+          <span class="fx-site-header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</header>
+
+{% stylesheet %}
+  .fx-site-header {
+    grid-column: 1 / -1;
+    z-index: 20;
+    width: 100%;
+    background: var(--fx-header-background);
+    color: var(--fx-header-color);
+  }
+
+  .fx-site-header--bordered {
+    border-block-end: 1px solid color-mix(in srgb, var(--fx-header-color) 18%, transparent);
+  }
+
+  .fx-site-header--sticky-always {
+    position: sticky;
+    inset-block-start: 0;
+  }
+
+  .fx-site-header--sticky-on-scroll-up {
+    position: sticky;
+    inset-block-start: 0;
+    transition: transform var(--fx-transition-base) ease;
+  }
+
+  .fx-site-header--sticky-on-scroll-up.is-hidden {
+    transform: translateY(-100%);
+  }
+
+  .fx-site-header--transparent {
+    background: color-mix(in srgb, var(--fx-header-background) 88%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .fx-site-header__inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "menu logo actions";
+    align-items: center;
+    gap: 0.75rem;
+    width: min(100% - 2rem, var(--fx-page-width));
+    min-height: 4.5rem;
+    margin-inline: auto;
+  }
+
+  .fx-site-header__mobile-menu {
+    grid-area: menu;
+  }
+
+  .fx-site-header__mobile-menu > summary {
+    list-style: none;
+  }
+
+  .fx-site-header__mobile-menu > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .fx-site-header__logo {
+    grid-area: logo;
+    justify-self: center;
+    max-width: var(--fx-logo-width);
+    color: inherit;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.1;
+    text-decoration: none;
+  }
+
+  .fx-site-header__logo img {
+    width: min(100%, var(--fx-logo-width));
+  }
+
+  .fx-site-header__nav {
+    display: none;
+    grid-area: nav;
+    min-width: 0;
+  }
+
+  .fx-site-header__nav-list,
+  .fx-site-header__drawer-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .fx-site-header__nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .fx-site-header__nav-link,
+  .fx-site-header__drawer-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .fx-site-header__nav-link {
+    display: inline-flex;
+    padding-block: 0.5rem;
+    border-block-end: 1px solid transparent;
+  }
+
+  .fx-site-header__nav-link:hover,
+  .fx-site-header__nav-link.is-active {
+    border-block-end-color: currentcolor;
+  }
+
+  .fx-site-header__actions {
+    display: flex;
+    grid-area: actions;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.25rem;
+  }
+
+  .fx-site-header__action {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--fx-radius-medium);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .fx-site-header__action:hover {
+    background: color-mix(in srgb, currentcolor 8%, transparent);
+  }
+
+  .fx-site-header__action:focus-visible,
+  .fx-site-header__drawer-close:focus-visible,
+  .fx-site-header__logo:focus-visible,
+  .fx-site-header__nav-link:focus-visible,
+  .fx-site-header__drawer-link:focus-visible,
+  .fx-site-header__language-select:focus-visible {
+    outline: 2px solid var(--fx-focus-outline);
+    outline-offset: 3px;
+  }
+
+  .fx-site-header__action svg {
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+  }
+
+  .fx-site-header__menu-icon,
+  .fx-site-header__menu-icon::before,
+  .fx-site-header__menu-icon::after {
+    display: block;
+    inline-size: 1.25rem;
+    block-size: 1px;
+    background: currentcolor;
+  }
+
+  .fx-site-header__menu-icon {
+    position: relative;
+  }
+
+  .fx-site-header__menu-icon::before,
+  .fx-site-header__menu-icon::after {
+    position: absolute;
+    inset-inline-start: 0;
+    content: "";
+  }
+
+  .fx-site-header__menu-icon::before {
+    inset-block-start: -0.375rem;
+  }
+
+  .fx-site-header__menu-icon::after {
+    inset-block-start: 0.375rem;
+  }
+
+  .fx-site-header__drawer {
+    position: fixed;
+    z-index: 50;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: min(88vw, 22rem);
+    padding: 1.25rem;
+    background: var(--fx-header-background);
+    color: var(--fx-header-color);
+    box-shadow: var(--fx-shadow-soft);
+    overflow-y: auto;
+  }
+
+  .fx-site-header__drawer-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block-end: 1rem;
+    border-block-end: 1px solid color-mix(in srgb, currentcolor 18%, transparent);
+    font-weight: 700;
+  }
+
+  .fx-site-header__drawer-close {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--fx-radius-medium);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .fx-site-header__drawer-list {
+    display: grid;
+    gap: 0;
+  }
+
+  .fx-site-header__drawer-link {
+    display: block;
+    padding-block: 0.875rem;
+    border-block-end: 1px solid color-mix(in srgb, currentcolor 12%, transparent);
+  }
+
+  .fx-site-header__cart-count {
+    position: absolute;
+    inset-block-start: 0.125rem;
+    inset-inline-end: 0;
+    display: grid;
+    place-items: center;
+    min-inline-size: 1.125rem;
+    block-size: 1.125rem;
+    padding-inline: 0.25rem;
+    border-radius: 999px;
+    background: var(--fx-color-accent);
+    color: #ffffff;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .fx-site-header__localization {
+    display: none;
+  }
+
+  .fx-site-header__language-select {
+    max-width: 8rem;
+    min-height: 2.5rem;
+    border: 1px solid color-mix(in srgb, currentcolor 22%, transparent);
+    border-radius: var(--fx-radius-small);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+  }
+
+  @media screen and (max-width: 749px) {
+    .fx-site-header__actions .fx-site-header__action:nth-of-type(1) {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .fx-site-header__inner {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-areas: "logo nav actions";
+      min-height: 5rem;
+    }
+
+    .fx-site-header__mobile-menu {
+      display: none;
+    }
+
+    .fx-site-header__logo {
+      justify-self: start;
+    }
+
+    .fx-site-header__nav {
+      display: block;
+    }
+
+    .fx-site-header__localization {
+      display: block;
+    }
+
+    .fx-site-header--logo-center-menu-start .fx-site-header__inner {
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      grid-template-areas: "nav logo actions";
+    }
+
+    .fx-site-header--logo-center-menu-start .fx-site-header__logo {
+      justify-self: center;
+    }
+
+    .fx-site-header--logo-center-menu-start .fx-site-header__nav-list {
+      justify-content: flex-start;
+    }
+
+    .fx-site-header--logo-center-menu-below .fx-site-header__inner {
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-areas:
+        ". logo actions"
+        "nav nav nav";
+      padding-block: 0.75rem;
+    }
+
+    .fx-site-header--logo-center-menu-below .fx-site-header__logo {
+      justify-self: center;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const headers = document.querySelectorAll('[data-flexora-header]');
+
+    headers.forEach((header) => {
+      const menu = header.querySelector('.fx-site-header__mobile-menu');
+      const closeButton = header.querySelector('[data-flexora-menu-close]');
+
+      closeButton?.addEventListener('click', () => {
+        menu?.removeAttribute('open');
+        menu?.querySelector('summary')?.focus();
+      });
+
+      menu?.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          menu.removeAttribute('open');
+          menu.querySelector('summary')?.focus();
+        }
+      });
+
+      if (header.dataset.stickyMode === 'on-scroll-up') {
+        let previousScroll = window.scrollY;
+
+        window.addEventListener(
+          'scroll',
+          () => {
+            const currentScroll = window.scrollY;
+            header.classList.toggle('is-hidden', currentScroll > previousScroll && currentScroll > header.offsetHeight);
+            previousScroll = currentScroll;
+          },
+          { passive: true }
+        );
+      }
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.flexora_header.name",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.flexora_header.settings.logo.label"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "t:sections.flexora_header.settings.logo_width.label",
+      "min": 60,
+      "max": 240,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "t:sections.flexora_header.settings.main_menu.label",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "header_layout",
+      "label": "t:sections.flexora_header.settings.layout.label",
+      "options": [
+        {
+          "value": "logo-start-menu-center",
+          "label": "t:sections.flexora_header.options.layout.logo_start_menu_center"
+        },
+        {
+          "value": "logo-center-menu-start",
+          "label": "t:sections.flexora_header.options.layout.logo_center_menu_start"
+        },
+        {
+          "value": "logo-center-menu-below",
+          "label": "t:sections.flexora_header.options.layout.logo_center_menu_below"
+        }
+      ],
+      "default": "logo-start-menu-center"
+    },
+    {
+      "type": "select",
+      "id": "sticky_header",
+      "label": "t:sections.flexora_header.settings.sticky.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.flexora_header.options.sticky.none"
+        },
+        {
+          "value": "on-scroll-up",
+          "label": "t:sections.flexora_header.options.sticky.on_scroll_up"
+        },
+        {
+          "value": "always",
+          "label": "t:sections.flexora_header.options.sticky.always"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "t:sections.flexora_header.settings.show_search.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "t:sections.flexora_header.settings.show_account.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_count",
+      "label": "t:sections.flexora_header.settings.show_cart_count.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "label": "t:sections.flexora_header.settings.show_language_selector.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent_header",
+      "label": "t:sections.flexora_header.settings.enable_transparent_header.label",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.flexora_header.settings.background_color.label",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.flexora_header.settings.text_color.label",
+      "default": "#111827"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "t:sections.flexora_header.settings.show_border.label",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.flexora_header.name"
+    }
+  ]
+}
+{% endschema %}

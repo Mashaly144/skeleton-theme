@@ -1,0 +1,31 @@
+{% doc %}
+  Outputs Flexora's global design tokens from Theme Editor settings.
+{% enddoc %}
+
+{% style %}
+  :root {
+    --fx-color-background: {{ settings.fx_color_background | default: '#ffffff' }};
+    --fx-color-text: {{ settings.fx_color_text | default: '#1f2933' }};
+    --fx-color-heading: {{ settings.fx_color_heading | default: '#111827' }};
+    --fx-color-primary: {{ settings.fx_color_primary | default: '#2f5d50' }};
+    --fx-color-secondary: {{ settings.fx_color_secondary | default: '#d8e7e1' }};
+    --fx-color-accent: {{ settings.fx_color_accent | default: '#c58b3a' }};
+    --fx-color-border: {{ settings.fx_color_border | default: '#d9dee3' }};
+    --fx-page-width: {{ settings.fx_page_width | default: '90rem' }};
+    --fx-section-spacing-desktop: {{ settings.fx_section_spacing_desktop | default: 72 }}px;
+    --fx-section-spacing-mobile: {{ settings.fx_section_spacing_mobile | default: 40 }}px;
+    --fx-radius-small: {{ settings.fx_radius_small | default: 4 }}px;
+    --fx-radius-medium: {{ settings.fx_radius_medium | default: 8 }}px;
+    --fx-radius-large: {{ settings.fx_radius_large | default: 16 }}px;
+    --fx-button-radius: {{ settings.fx_button_radius | default: 8 }}px;
+    --fx-shadow-soft: {% if settings.fx_enable_shadows %}0 10px 30px rgb(17 24 39 / 10%){% else %}none{% endif %};
+    --fx-transition-base: {% case settings.fx_animation_level %}{% when 'none' %}0ms{% when 'subtle' %}150ms{% else %}250ms{% endcase %};
+    --fx-focus-outline: {% case settings.fx_focus_style %}{% when 'dark' %}var(--fx-color-heading){% when 'primary' %}var(--fx-color-primary){% else %}var(--fx-color-accent){% endcase %};
+  }
+{% endstyle %}
+
+{% if false %}
+  {% render 'flexora-section-header' %}
+  {% render 'flexora-button' %}
+  {% render 'flexora-badge' %}
+{% endif %}

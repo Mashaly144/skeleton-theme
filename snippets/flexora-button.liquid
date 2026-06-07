@@ -1,0 +1,51 @@
+{% doc %}
+  Renders a reusable Flexora link or button.
+
+  @param {string} label - Button label
+  @param {string} [url] - Optional link destination
+  @param {string} [style] - primary, secondary, outline, or ghost
+  @param {string} [size] - small, medium, or large
+  @param {boolean} [full_width] - Makes the button full width
+  @param {string} [classes] - Additional CSS classes
+  @param {string} [attributes] - Trusted HTML attributes supplied by theme code
+
+  @example
+  {% render 'flexora-button', label: 'Shop now', url: routes.all_products_collection_url %}
+{% enddoc %}
+
+{%- liquid
+  assign button_style = style | default: settings.fx_button_style | default: 'primary'
+  assign allowed_styles = 'primary,secondary,outline,ghost' | split: ','
+  unless allowed_styles contains button_style
+    assign button_style = 'primary'
+  endunless
+
+  assign button_size = size | default: 'medium'
+  assign allowed_sizes = 'small,medium,large' | split: ','
+  unless allowed_sizes contains button_size
+    assign button_size = 'medium'
+  endunless
+
+  capture button_classes
+    echo 'fx-button fx-button--' | append: button_style
+    echo ' fx-button--' | append: button_size
+    if full_width
+      echo ' fx-button--full'
+    endif
+    if classes != blank
+      echo ' ' | append: classes
+    endif
+  endcapture
+-%}
+
+{% if label != blank %}
+  {% if url != blank %}
+    <a class="{{ button_classes | strip | escape }}" href="{{ url }}" {{ attributes }}>
+      {{ label | escape }}
+    </a>
+  {% else %}
+    <button class="{{ button_classes | strip | escape }}" type="button" {{ attributes }}>
+      {{ label | escape }}
+    </button>
+  {% endif %}
+{% endif %}

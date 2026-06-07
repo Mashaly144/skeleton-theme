@@ -1,0 +1,138 @@
+{
+  "404": {
+    "title": "404",
+    "not_found": "الصفحة غير موجودة.",
+    "back_to_shopping": "العودة إلى التسوق"
+  },
+  "blog": {
+    "article_comments": "التعليقات",
+    "article_metadata_html": "{{ date }} بواسطة {{ author }}",
+    "comment_form_body": "التعليق",
+    "comment_form_email": "البريد الإلكتروني",
+    "comment_form_name": "الاسم",
+    "comment_form_submit": "نشر",
+    "comment_form_title": "إضافة تعليق"
+  },
+  "cart": {
+    "checkout": "إتمام الطلب",
+    "title": "سلة التسوق",
+    "update": "تحديث",
+    "remove": "إزالة"
+  },
+  "customers": {
+    "login": {
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "title": "تسجيل الدخول"
+    }
+  },
+  "collections": {
+    "title": "المجموعات"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "إضافة إلى Apple Wallet",
+    "card": "بطاقة هدايا",
+    "expired": "انتهت صلاحية بطاقة الهدايا هذه",
+    "expires_on": "تنتهي الصلاحية في {{ expires_on }}",
+    "use_at_checkout": "استخدم بطاقة الهدايا هذه عند إتمام الطلب"
+  },
+  "password": {
+    "title": "هذا المتجر خاص",
+    "password": "كلمة المرور",
+    "enter": "دخول"
+  },
+  "search": {
+    "title": "البحث",
+    "placeholder": "ابحث في المقالات أو الصفحات أو المنتجات",
+    "submit": "بحث",
+    "no_results_html": "لم يتم العثور على نتائج لـ {{ terms }}",
+    "results_for_html": "تم العثور على {{ count }} نتيجة لـ {{ terms }}"
+  },
+  "flexora": {
+    "header": {
+      "search": "البحث",
+      "account": "الحساب",
+      "cart": "سلة التسوق",
+      "menu": "القائمة",
+      "open_menu": "فتح القائمة",
+      "close_menu": "إغلاق القائمة",
+      "cart_count": "سلة التسوق، {{ count }} عناصر",
+      "language": "اللغة"
+    },
+    "announcement": {
+      "label": "إعلان",
+      "close": "إغلاق الإعلان"
+    },
+    "footer": {
+      "menu": "قائمة التذييل",
+      "secondary_menu": "قائمة التذييل الثانوية",
+      "newsletter": "النشرة البريدية",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "أدخل بريدك الإلكتروني",
+      "subscribe": "اشتراك",
+      "newsletter_success": "شكرًا لاشتراكك.",
+      "newsletter_error": "يرجى التحقق من بريدك الإلكتروني والمحاولة مرة أخرى.",
+      "social_links": "روابط التواصل الاجتماعي",
+      "payment_methods": "طرق الدفع",
+      "copyright": "حقوق النشر",
+      "language": "اللغة",
+      "country": "الدولة أو المنطقة"
+    },
+    "social": {
+      "facebook": "فيسبوك",
+      "instagram": "إنستغرام",
+      "tiktok": "تيك توك",
+      "x": "إكس",
+      "youtube": "يوتيوب",
+      "snapchat": "سناب شات",
+      "pinterest": "بنترست",
+      "linkedin": "لينكدإن",
+      "whatsapp": "واتساب"
+    },
+    "hero": {
+      "label": "عرض الواجهة الرئيسية",
+      "previous": "الشريحة السابقة",
+      "next": "الشريحة التالية",
+      "go_to_slide": "الانتقال إلى الشريحة {{ number }}",
+      "slide": "شريحة",
+      "pause": "إيقاف عرض الشرائح",
+      "play": "تشغيل عرض الشرائح",
+      "placeholder_heading": "أضف شريحة رئيسية",
+      "placeholder_text": "أضف شريحة واحدة على الأقل لعرض واجهة فليكسورا الرئيسية.",
+      "scroll_down": "الانتقال إلى المحتوى"
+    },
+    "collection_cards": {
+      "view_collection": "عرض المجموعة",
+      "view_all": "عرض الكل",
+      "previous": "المجموعات السابقة",
+      "next": "المجموعات التالية",
+      "placeholder_heading": "أضف بطاقات المجموعات",
+      "placeholder_text": "أضف بطاقة مجموعة واحدة على الأقل لعرض أقسام المتجر.",
+      "products_count": {
+        "one": "منتج واحد",
+        "other": "{{ count }} منتجات"
+      }
+    },
+    "product_card": {
+      "sale": "تخفيض",
+      "sold_out": "نفد المخزون",
+      "quick_add": "أضف إلى السلة",
+      "choose_options": "اختر الخيارات",
+      "view_product": "عرض {{ title }}",
+      "vendor": "العلامة التجارية",
+      "regular_price": "السعر العادي",
+      "sale_price": "سعر التخفيض",
+      "compare_at_price": "السعر الأصلي",
+      "placeholder_title": "منتج تجريبي"
+    },
+    "featured_collection": {
+      "view_all": "عرض الكل",
+      "previous": "المنتجات السابقة",
+      "next": "المنتجات التالية",
+      "placeholder_heading": "اختر مجموعة",
+      "placeholder_text": "اختر مجموعة من محرر القالب لعرض منتجاتها.",
+      "empty": "لا تحتوي هذه المجموعة على منتجات حتى الآن."
+    }
+  }
+}

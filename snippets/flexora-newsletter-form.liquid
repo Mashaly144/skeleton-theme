@@ -1,0 +1,78 @@
+{% doc %}
+  Renders a reusable Shopify customer newsletter form.
+
+  @param {string} [heading] - Newsletter heading
+  @param {string} [text] - Supporting text
+  @param {string} [button_label] - Submit button label
+  @param {string} [classes] - Additional CSS classes
+  @param {string} [form_id] - Unique form ID
+
+  @example
+  {% render 'flexora-newsletter-form', heading: settings.fx_newsletter_heading %}
+{% enddoc %}
+
+{%- liquid
+  assign newsletter_heading = heading | default: settings.fx_newsletter_heading
+  assign newsletter_text = text | default: settings.fx_newsletter_text
+  assign newsletter_button = button_label | default: settings.fx_newsletter_button_label
+  assign newsletter_form_id = form_id | default: 'FlexoraNewsletterForm'
+
+  if newsletter_button == blank
+    assign newsletter_button = 'flexora.footer.subscribe' | t
+  endif
+-%}
+
+<div class="fx-newsletter{% if classes != blank %} {{ classes | escape }}{% endif %}">
+  {% if newsletter_heading != blank %}
+    <h2 class="fx-newsletter__heading">{{ newsletter_heading | escape }}</h2>
+  {% endif %}
+
+  {% if newsletter_text != blank %}
+    <div class="fx-newsletter__text">{{ newsletter_text | escape | newline_to_br }}</div>
+  {% endif %}
+
+  {% form 'customer', id: newsletter_form_id, class: 'fx-form fx-newsletter__form' %}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+
+    <div class="fx-newsletter__fields">
+      <label class="fx-visually-hidden" for="{{ newsletter_form_id }}-email">
+        {{ 'flexora.footer.email' | t }}
+      </label>
+      <input
+        id="{{ newsletter_form_id }}-email"
+        class="fx-input"
+        type="email"
+        name="contact[email]"
+        value="{{ form.email }}"
+        autocorrect="off"
+        autocapitalize="off"
+        autocomplete="email"
+        placeholder="{{ 'flexora.footer.email_placeholder' | t }}"
+        required
+        {% if form.errors %}
+          aria-invalid="true"
+          aria-describedby="{{ newsletter_form_id }}-error"
+        {% endif %}
+      >
+      <button class="fx-button fx-button--primary fx-button--medium" type="submit">
+        {{ newsletter_button | escape }}
+      </button>
+    </div>
+
+    {% if form.posted_successfully? %}
+      <p class="fx-newsletter__success" role="status">
+        {% if settings.fx_newsletter_success_message != blank %}
+          {{ settings.fx_newsletter_success_message | escape }}
+        {% else %}
+          {{ 'flexora.footer.newsletter_success' | t }}
+        {% endif %}
+      </p>
+    {% endif %}
+
+    {% if form.errors %}
+      <div id="{{ newsletter_form_id }}-error" class="fx-error-text" role="alert">
+        {{ form.errors | default_errors }}
+      </div>
+    {% endif %}
+  {% endform %}
+</div>

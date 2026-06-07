@@ -1,0 +1,192 @@
+{% doc %}
+  Renders a reusable Flexora product card.
+
+  @param {product} product - Product to display
+  @param {string} [card_style] - soft, bordered, shadow, or minimal
+  @param {string} [image_ratio] - square, portrait, landscape, or natural
+  @param {boolean} [show_vendor] - Shows the product vendor
+  @param {boolean} [show_rating] - Reserved for future rating integrations
+  @param {boolean} [show_price] - Shows product pricing
+  @param {boolean} [show_badges] - Shows sale and sold-out badges
+  @param {boolean} [show_quick_add] - Shows a basic product action
+  @param {boolean} [show_secondary_image] - Shows the second image on interaction
+  @param {boolean} [show_swatches] - Shows lightweight color-option indicators
+  @param {string} [button_label] - Optional quick-add label override
+  @param {string} [button_style] - Button style for the product action
+  @param {string} [classes] - Additional CSS classes
+  @param {boolean} [show_placeholder] - Renders a placeholder when product is blank
+
+  @example
+  {% render 'flexora-product-card', product: product, show_price: true %}
+{% enddoc %}
+
+{%- liquid
+  assign resolved_card_style = card_style | default: 'soft'
+  assign allowed_card_styles = 'soft,bordered,shadow,minimal' | split: ','
+  unless allowed_card_styles contains resolved_card_style
+    assign resolved_card_style = 'soft'
+  endunless
+
+  assign resolved_image_ratio = image_ratio | default: 'portrait'
+  assign allowed_image_ratios = 'square,portrait,landscape,natural' | split: ','
+  unless allowed_image_ratios contains resolved_image_ratio
+    assign resolved_image_ratio = 'portrait'
+  endunless
+
+    assign resolved_button_style = button_style | default: 'primary'
+  assign allowed_button_styles = 'primary,secondary,outline,ghost' | split: ','
+    unless allowed_button_styles contains resolved_button_style
+      assign resolved_button_style = 'primary'
+    endunless
+
+    if show_rating
+      assign rating_integration_requested = true
+    endif
+-%}
+
+{% if product != blank %}
+  {%- liquid
+    assign featured_image = product.featured_image
+    assign secondary_image = product.images[1]
+    assign image_alt = featured_image.alt | default: product.title
+    assign selected_variant = product.selected_or_first_available_variant
+    assign is_on_sale = false
+    if product.compare_at_price > product.price
+      assign is_on_sale = true
+    endif
+    assign can_quick_add = false
+    if product.variants.size == 1 and selected_variant.available
+      assign can_quick_add = true
+    endif
+    assign action_label = button_label
+    if action_label == blank
+      if can_quick_add
+        assign action_label = 'flexora.product_card.quick_add' | t
+      else
+        assign action_label = 'flexora.product_card.choose_options' | t
+      endif
+    endif
+  -%}
+
+  <article class="fx-product-card fx-product-card--{{ resolved_card_style }}{% if classes != blank %} {{ classes | escape }}{% endif %}">
+    <div class="fx-product-card__media fx-product-card__media--{{ resolved_image_ratio }}">
+      <a href="{{ product.url }}" class="fx-product-card__media-link" aria-label="{{ 'flexora.product_card.view_product' | t: title: product.title | escape }}">
+        {% if featured_image != blank %}
+          {{
+            featured_image
+            | image_url: width: 940
+            | image_tag:
+              widths: '360, 533, 720, 940',
+              sizes: '(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw',
+              loading: 'lazy',
+              alt: image_alt,
+              class: 'fx-product-card__image fx-product-card__image--primary'
+          }}
+          {% if show_secondary_image and secondary_image != blank %}
+            {{
+              secondary_image
+              | image_url: width: 940
+              | image_tag:
+                widths: '360, 533, 720, 940',
+                sizes: '(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw',
+                loading: 'lazy',
+                alt: secondary_image.alt,
+                class: 'fx-product-card__image fx-product-card__image--secondary'
+            }}
+          {% endif %}
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'fx-product-card__placeholder' }}
+        {% endif %}
+      </a>
+
+      {% if show_badges %}
+        <div class="fx-product-card__badges">
+          {% unless product.available %}
+            {% render 'flexora-badge', label: 'flexora.product_card.sold_out' | t, type: 'sold-out' %}
+          {% elsif is_on_sale %}
+            {% render 'flexora-badge', label: 'flexora.product_card.sale' | t, type: 'sale' %}
+          {% endunless %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="fx-product-card__content">
+      {% if show_vendor and product.vendor != blank %}
+        <p class="fx-product-card__vendor">{{ product.vendor | escape }}</p>
+      {% endif %}
+
+      {% if rating_integration_requested %}
+        {% comment %}Reserved for a future app-provided rating integration.{% endcomment %}
+      {% endif %}
+
+      <h3 class="fx-product-card__title">
+        <a href="{{ product.url }}">{{ product.title | escape }}</a>
+      </h3>
+
+      {% if show_price %}
+        <div class="fx-price{% if is_on_sale %} fx-price--on-sale{% endif %}">
+          {% if is_on_sale %}
+            <span class="fx-visually-hidden">{{ 'flexora.product_card.sale_price' | t }}</span>
+            <span class="fx-price__sale">{{ product.price | money }}</span>
+            <span class="fx-visually-hidden">{{ 'flexora.product_card.compare_at_price' | t }}</span>
+            <s class="fx-price__compare">{{ product.compare_at_price | money }}</s>
+          {% else %}
+            <span class="fx-visually-hidden">{{ 'flexora.product_card.regular_price' | t }}</span>
+            <span class="fx-price__regular">{{ product.price | money }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if show_swatches %}
+        {% for option in product.options_with_values %}
+          {% assign option_name = option.name | downcase %}
+          {% if option_name == 'color' or option_name == 'colour' or option_name == 'اللون' %}
+            <div class="fx-product-card__swatches" aria-label="{{ option.name | escape }}">
+              {% for value in option.values limit: 5 %}
+                <span class="fx-product-card__swatch" title="{{ value | escape }}" aria-label="{{ value | escape }}"></span>
+              {% endfor %}
+            </div>
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if show_quick_add %}
+        <div class="fx-product-card__action">
+          {% if can_quick_add %}
+            {% form 'product', product, class: 'fx-product-card__form' %}
+              <input type="hidden" name="id" value="{{ selected_variant.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button
+                type="submit"
+                name="add"
+                class="fx-button fx-button--{{ resolved_button_style }} fx-button--small fx-button--full"
+                aria-label="{{ action_label | append: ': ' | append: product.title | escape }}"
+              >
+                {{ action_label | escape }}
+              </button>
+            {% endform %}
+          {% else %}
+            {% render 'flexora-button',
+              label: action_label,
+              url: product.url,
+              style: resolved_button_style,
+              size: 'small',
+              full_width: true,
+              attributes: 'aria-label="' | append: action_label | append: ': ' | append: product.title | escape | append: '"'
+            %}
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </article>
+{% elsif show_placeholder %}
+  <article class="fx-product-card fx-product-card--{{ resolved_card_style }} fx-product-card--placeholder{% if classes != blank %} {{ classes | escape }}{% endif %}">
+    <div class="fx-product-card__media fx-product-card__media--{{ resolved_image_ratio }}">
+      {{ 'product-1' | placeholder_svg_tag: 'fx-product-card__placeholder' }}
+    </div>
+    <div class="fx-product-card__content">
+      <h3 class="fx-product-card__title">{{ 'flexora.product_card.placeholder_title' | t }}</h3>
+    </div>
+  </article>
+{% endif %}

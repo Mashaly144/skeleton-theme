@@ -1,0 +1,48 @@
+{% doc %}
+  Renders a reusable Flexora section heading.
+
+  @param {string} [eyebrow] - Optional eyebrow text
+  @param {string} [heading] - Optional heading text
+  @param {string} [text] - Optional supporting text
+  @param {string} [align] - start, center, or end
+  @param {string} [heading_tag] - Heading tag from h1 through h6
+  @param {string} [classes] - Additional CSS classes
+  @param {string} [id] - Optional wrapper ID
+
+  @example
+  {% render 'flexora-section-header', heading: section.settings.heading, align: 'center' %}
+{% enddoc %}
+
+{%- liquid
+  assign header_align = align | default: 'start'
+  unless header_align == 'center' or header_align == 'end'
+    assign header_align = 'start'
+  endunless
+
+  assign title_tag = heading_tag | default: 'h2' | downcase
+  assign allowed_tags = 'h1,h2,h3,h4,h5,h6' | split: ','
+  unless allowed_tags contains title_tag
+    assign title_tag = 'h2'
+  endunless
+-%}
+
+{% if eyebrow != blank or heading != blank or text != blank %}
+  <div
+    class="fx-section-header fx-section-header--{{ header_align }}{% if classes != blank %} {{ classes | escape }}{% endif %}"
+    {% if id != blank %}
+      id="{{ id | escape }}"
+    {% endif %}
+  >
+    {% if eyebrow != blank %}
+      <p class="fx-eyebrow">{{ eyebrow | escape }}</p>
+    {% endif %}
+
+    {% if heading != blank %}
+      <{{ title_tag }} class="fx-section-title">{{ heading | escape }}</{{ title_tag }}>
+    {% endif %}
+
+    {% if text != blank %}
+      <div class="fx-section-subtitle">{{ text }}</div>
+    {% endif %}
+  </div>
+{% endif %}

@@ -79,5 +79,323 @@
         "default": 4
       }
     ]
+  },
+  {
+    "name": "t:flexora.design_system",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:flexora.colors"
+      },
+      {
+        "type": "color",
+        "id": "fx_color_background",
+        "label": "t:flexora.background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "fx_color_text",
+        "label": "t:flexora.text",
+        "default": "#1F2933"
+      },
+      {
+        "type": "color",
+        "id": "fx_color_heading",
+        "label": "t:flexora.heading",
+        "default": "#111827"
+      },
+      {
+        "type": "color",
+        "id": "fx_color_primary",
+        "label": "t:flexora.primary",
+        "default": "#2F5D50"
+      },
+      {
+        "type": "color",
+        "id": "fx_color_secondary",
+        "label": "t:flexora.secondary",
+        "default": "#D8E7E1"
+      },
+      {
+        "type": "color",
+        "id": "fx_color_accent",
+        "label": "t:flexora.accent",
+        "default": "#C58B3A"
+      },
+      {
+        "type": "color",
+        "id": "fx_color_border",
+        "label": "t:flexora.border",
+        "default": "#D9DEE3"
+      },
+      {
+        "type": "header",
+        "content": "t:flexora.layout"
+      },
+      {
+        "type": "select",
+        "id": "fx_page_width",
+        "label": "t:flexora.page_width",
+        "options": [
+          {
+            "value": "75rem",
+            "label": "t:flexora.width_compact"
+          },
+          {
+            "value": "90rem",
+            "label": "t:flexora.width_standard"
+          },
+          {
+            "value": "105rem",
+            "label": "t:flexora.width_wide"
+          }
+        ],
+        "default": "90rem"
+      },
+      {
+        "type": "range",
+        "id": "fx_section_spacing_desktop",
+        "label": "t:flexora.section_spacing_desktop",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 72
+      },
+      {
+        "type": "range",
+        "id": "fx_section_spacing_mobile",
+        "label": "t:flexora.section_spacing_mobile",
+        "min": 16,
+        "max": 80,
+        "step": 4,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "t:flexora.style"
+      },
+      {
+        "type": "range",
+        "id": "fx_radius_small",
+        "label": "t:flexora.radius_small",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "unit": "px",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "fx_radius_medium",
+        "label": "t:flexora.radius_medium",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "fx_radius_large",
+        "label": "t:flexora.radius_large",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "checkbox",
+        "id": "fx_enable_shadows",
+        "label": "t:flexora.enable_shadows",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "fx_animation_level",
+        "label": "t:flexora.animation_level",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:flexora.animation_none"
+          },
+          {
+            "value": "subtle",
+            "label": "t:flexora.animation_subtle"
+          },
+          {
+            "value": "standard",
+            "label": "t:flexora.animation_standard"
+          }
+        ],
+        "default": "subtle"
+      },
+      {
+        "type": "header",
+        "content": "t:flexora.ui_primitives"
+      },
+      {
+        "type": "range",
+        "id": "fx_button_radius",
+        "label": "t:flexora.button_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "default": 8
+      },
+      {
+        "type": "select",
+        "id": "fx_button_style",
+        "label": "t:flexora.button_style",
+        "options": [
+          {
+            "value": "primary",
+            "label": "t:flexora.button_primary"
+          },
+          {
+            "value": "secondary",
+            "label": "t:flexora.button_secondary"
+          },
+          {
+            "value": "outline",
+            "label": "t:flexora.button_outline"
+          },
+          {
+            "value": "ghost",
+            "label": "t:flexora.button_ghost"
+          }
+        ],
+        "default": "primary"
+      },
+      {
+        "type": "select",
+        "id": "fx_card_style",
+        "label": "t:flexora.card_style",
+        "options": [
+          {
+            "value": "soft",
+            "label": "t:flexora.card_soft"
+          },
+          {
+            "value": "bordered",
+            "label": "t:flexora.card_bordered"
+          },
+          {
+            "value": "shadow",
+            "label": "t:flexora.card_shadow"
+          }
+        ],
+        "default": "bordered"
+      },
+      {
+        "type": "select",
+        "id": "fx_focus_style",
+        "label": "t:flexora.focus_style",
+        "options": [
+          {
+            "value": "accent",
+            "label": "t:flexora.focus_accent"
+          },
+          {
+            "value": "primary",
+            "label": "t:flexora.focus_primary"
+          },
+          {
+            "value": "dark",
+            "label": "t:flexora.focus_dark"
+          }
+        ],
+        "default": "accent"
+      }
+    ]
+  },
+  {
+    "name": "t:settings.flexora_social.name",
+    "settings": [
+      {
+        "type": "url",
+        "id": "fx_social_facebook_url",
+        "label": "t:settings.flexora_social.facebook.label"
+      },
+      {
+        "type": "url",
+        "id": "fx_social_instagram_url",
+        "label": "t:settings.flexora_social.instagram.label"
+      },
+      {
+        "type": "url",
+        "id": "fx_social_tiktok_url",
+        "label": "t:settings.flexora_social.tiktok.label"
+      },
+      {
+        "type": "url",
+        "id": "fx_social_x_url",
+        "label": "t:settings.flexora_social.x.label"
+      },
+      {
+        "type": "url",
+        "id": "fx_social_youtube_url",
+        "label": "t:settings.flexora_social.youtube.label"
+      },
+      {
+        "type": "url",
+        "id": "fx_social_snapchat_url",
+        "label": "t:settings.flexora_social.snapchat.label"
+      },
+      {
+        "type": "url",
+        "id": "fx_social_pinterest_url",
+        "label": "t:settings.flexora_social.pinterest.label"
+      },
+      {
+        "type": "url",
+        "id": "fx_social_linkedin_url",
+        "label": "t:settings.flexora_social.linkedin.label"
+      },
+      {
+        "type": "url",
+        "id": "fx_social_whatsapp_url",
+        "label": "t:settings.flexora_social.whatsapp.label"
+      }
+    ]
+  },
+  {
+    "name": "t:settings.flexora_newsletter.name",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "fx_newsletter_enabled",
+        "label": "t:settings.flexora_newsletter.enabled.label",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "fx_newsletter_heading",
+        "label": "t:settings.flexora_newsletter.heading.label",
+        "default": "انضم إلى نشرتنا البريدية"
+      },
+      {
+        "type": "textarea",
+        "id": "fx_newsletter_text",
+        "label": "t:settings.flexora_newsletter.text.label",
+        "default": "اشترك لتصلك أحدث المنتجات والعروض."
+      },
+      {
+        "type": "text",
+        "id": "fx_newsletter_button_label",
+        "label": "t:settings.flexora_newsletter.button_label.label",
+        "default": "اشتراك"
+      },
+      {
+        "type": "text",
+        "id": "fx_newsletter_success_message",
+        "label": "t:settings.flexora_newsletter.success_message.label",
+        "default": "شكرًا لاشتراكك."
+      }
+    ]
   }
 ]

@@ -1,0 +1,346 @@
+{{ 'flexora-collection-cards.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flexora-collection-cards.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign section_id = 'FlexoraCollectionCards-' | append: section.id
+  assign heading_id = section_id | append: '-heading'
+  assign has_heading = false
+  if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.text != blank
+    assign has_heading = true
+  endif
+-%}
+
+{% if section.blocks.size > 0 %}
+  <section
+    id="{{ section_id }}"
+    class="fx-collection-cards fx-section fx-section--{{ section.settings.section_spacing }}"
+    style="
+      --fx-collection-background: {{ section.settings.background_color }};
+      --fx-collection-text: {{ section.settings.text_color }};
+      --fx-cards-desktop: {{ section.settings.cards_per_row_desktop }};
+      --fx-cards-tablet: {{ section.settings.cards_per_row_tablet }};
+      --fx-cards-mobile: {{ section.settings.cards_per_row_mobile }};
+    "
+    {% if has_heading %}
+      aria-labelledby="{{ heading_id }}"
+    {% endif %}
+  >
+    <div class="fx-container">
+      <div class="fx-collection-cards__heading-row">
+        {% render 'flexora-section-header',
+          eyebrow: section.settings.eyebrow,
+          heading: section.settings.heading,
+          text: section.settings.text,
+          align: section.settings.heading_alignment,
+          heading_tag: 'h2',
+          classes: 'fx-collection-cards__header',
+          id: heading_id
+        %}
+
+        {% if section.settings.show_view_all and section.settings.view_all_link != blank %}
+          {% render 'flexora-button',
+            label: section.settings.view_all_label,
+            url: section.settings.view_all_link,
+            style: 'ghost',
+            size: 'medium',
+            classes: 'fx-collection-cards__view-all'
+          %}
+        {% endif %}
+      </div>
+
+      <flexora-collection-cards
+        class="fx-collection-cards__carousel-shell"
+        data-section-id="{{ section.id }}"
+        data-layout="{{ section.settings.layout }}"
+      >
+        <div
+          class="fx-collection-cards__grid fx-collection-cards__grid--{{ section.settings.layout }}{% if section.settings.enable_mobile_scroll %} fx-collection-cards__grid--mobile-scroll{% endif %}"
+          data-collection-track
+        >
+          {% for block in section.blocks %}
+            {%- liquid
+              assign card_collection = block.settings.collection
+              assign card_title = block.settings.custom_title | default: card_collection.title
+              assign card_text = block.settings.custom_text
+              if card_text == blank and card_collection.description != blank
+                assign card_text = card_collection.description | strip_html | truncatewords: 18
+              endif
+
+              assign card_url = block.settings.custom_link | default: card_collection.url
+              assign card_image = block.settings.custom_image | default: card_collection.image
+              if card_image == blank and card_collection.products.first.featured_image != blank
+                assign card_image = card_collection.products.first.featured_image
+              endif
+
+              assign card_alt = card_image.alt | default: card_title | default: shop.name
+              assign card_label = card_title
+              if card_label == blank
+                assign card_label = 'flexora.collection_cards.view_collection' | t
+              endif
+              assign placeholder_index = forloop.index | modulo: 6 | plus: 1
+              assign placeholder_name = 'collection-' | append: placeholder_index
+            -%}
+
+            <article
+              class="fx-collection-card fx-collection-card--{{ section.settings.card_style }} fx-collection-card--text-{{ section.settings.text_position }}{% if block.settings.featured %} fx-collection-card--featured{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {% if card_url != blank %}
+                <a class="fx-collection-card__link-overlay" href="{{ card_url }}" aria-label="{{ card_label | escape }}"></a>
+              {% endif %}
+
+              <div class="fx-collection-card__media fx-collection-card__media--{{ section.settings.image_ratio }} fx-collection-card__media--position-{{ block.settings.image_position }}">
+                {% if card_image != blank %}
+                  {{
+                    card_image
+                    | image_url: width: 1200
+                    | image_tag:
+                      widths: '360, 533, 720, 940, 1200',
+                      sizes: '(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 80vw',
+                      loading: 'lazy',
+                      alt: card_alt,
+                      class: 'fx-collection-card__image'
+                  }}
+                {% else %}
+                  {{ placeholder_name | placeholder_svg_tag: 'fx-collection-card__placeholder' }}
+                {% endif %}
+
+                {% if block.settings.badge_text != blank %}
+                  <div class="fx-collection-card__badge">
+                    {% render 'flexora-badge', label: block.settings.badge_text, type: 'neutral' %}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="fx-collection-card__content">
+                {% if card_title != blank %}
+                  <h3 class="fx-collection-card__title">{{ card_title | escape }}</h3>
+                {% endif %}
+
+                {% if card_text != blank %}
+                  <p class="fx-collection-card__text">{{ card_text | escape }}</p>
+                {% endif %}
+
+                {% if section.settings.show_collection_count and card_collection != blank %}
+                  <p class="fx-collection-card__count">
+                    {{ 'flexora.collection_cards.products_count' | t: count: card_collection.products_count }}
+                  </p>
+                {% endif %}
+
+                {% if section.settings.show_button and card_url != blank %}
+                  <div class="fx-collection-card__action">
+                    {% render 'flexora-button',
+                      label: block.settings.button_label | default: section.settings.button_label,
+                      url: card_url,
+                      style: section.settings.button_style,
+                      size: 'small'
+                    %}
+                  </div>
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+
+        {% if section.settings.show_arrows and section.blocks.size > 1 %}
+          <div class="fx-collection-cards__arrows">
+            <button type="button" class="fx-collection-cards__arrow" data-collection-previous aria-label="{{ 'flexora.collection_cards.previous' | t }}">
+              <span aria-hidden="true">&larr;</span>
+            </button>
+            <button type="button" class="fx-collection-cards__arrow" data-collection-next aria-label="{{ 'flexora.collection_cards.next' | t }}">
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        {% endif %}
+      </flexora-collection-cards>
+    </div>
+  </section>
+{% elsif request.design_mode %}
+  <section class="fx-collection-cards fx-section fx-section--medium">
+    <div class="fx-container fx-collection-cards__placeholder">
+      <h2>{{ 'flexora.collection_cards.placeholder_heading' | t }}</h2>
+      <p>{{ 'flexora.collection_cards.placeholder_text' | t }}</p>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.flexora_collection_cards.name",
+  "tag": "div",
+  "class": "full-width",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "t:sections.flexora_collection_cards.settings.eyebrow.label" },
+    { "type": "text", "id": "heading", "label": "t:sections.flexora_collection_cards.settings.heading.label" },
+    { "type": "richtext", "id": "text", "label": "t:sections.flexora_collection_cards.settings.text.label" },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.flexora_collection_cards.settings.heading_alignment.label",
+      "options": [
+        { "value": "start", "label": "t:sections.flexora_collection_cards.options.position.start" },
+        { "value": "center", "label": "t:sections.flexora_collection_cards.options.position.center" },
+        { "value": "end", "label": "t:sections.flexora_collection_cards.options.position.end" }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.flexora_collection_cards.settings.layout.label",
+      "options": [
+        { "value": "grid", "label": "t:sections.flexora_collection_cards.settings.layout.options.grid" },
+        { "value": "carousel", "label": "t:sections.flexora_collection_cards.settings.layout.options.carousel" },
+        { "value": "masonry-like", "label": "t:sections.flexora_collection_cards.settings.layout.options.masonry_like" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "select",
+      "id": "cards_per_row_desktop",
+      "label": "t:sections.flexora_collection_cards.settings.cards_per_row_desktop.label",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "cards_per_row_tablet",
+      "label": "t:sections.flexora_collection_cards.settings.cards_per_row_tablet.label",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "cards_per_row_mobile",
+      "label": "t:sections.flexora_collection_cards.settings.cards_per_row_mobile.label",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.flexora_collection_cards.settings.image_ratio.label",
+      "options": [
+        { "value": "square", "label": "t:sections.flexora_collection_cards.settings.image_ratio.options.square" },
+        { "value": "portrait", "label": "t:sections.flexora_collection_cards.settings.image_ratio.options.portrait" },
+        { "value": "landscape", "label": "t:sections.flexora_collection_cards.settings.image_ratio.options.landscape" },
+        { "value": "wide", "label": "t:sections.flexora_collection_cards.settings.image_ratio.options.wide" },
+        { "value": "natural", "label": "t:sections.flexora_collection_cards.settings.image_ratio.options.natural" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "t:sections.flexora_collection_cards.settings.card_style.label",
+      "options": [
+        { "value": "soft", "label": "t:sections.flexora_collection_cards.settings.card_style.options.soft" },
+        { "value": "bordered", "label": "t:sections.flexora_collection_cards.settings.card_style.options.bordered" },
+        { "value": "shadow", "label": "t:sections.flexora_collection_cards.settings.card_style.options.shadow" },
+        { "value": "overlay", "label": "t:sections.flexora_collection_cards.settings.card_style.options.overlay" },
+        { "value": "minimal", "label": "t:sections.flexora_collection_cards.settings.card_style.options.minimal" }
+      ],
+      "default": "soft"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "t:sections.flexora_collection_cards.settings.text_position.label",
+      "options": [
+        { "value": "below-image", "label": "t:sections.flexora_collection_cards.settings.text_position.options.below_image" },
+        { "value": "overlay-start", "label": "t:sections.flexora_collection_cards.settings.text_position.options.overlay_start" },
+        { "value": "overlay-center", "label": "t:sections.flexora_collection_cards.settings.text_position.options.overlay_center" },
+        { "value": "overlay-end", "label": "t:sections.flexora_collection_cards.settings.text_position.options.overlay_end" }
+      ],
+      "default": "below-image"
+    },
+    { "type": "checkbox", "id": "show_collection_count", "label": "t:sections.flexora_collection_cards.settings.show_collection_count.label", "default": false },
+    { "type": "checkbox", "id": "show_button", "label": "t:sections.flexora_collection_cards.settings.show_button.label", "default": false },
+    { "type": "text", "id": "button_label", "label": "t:sections.flexora_collection_cards.settings.button_label.label", "default": "عرض المجموعة" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:sections.flexora_collection_cards.settings.button_style.label",
+      "options": [
+        { "value": "primary", "label": "t:flexora.button_primary" },
+        { "value": "secondary", "label": "t:flexora.button_secondary" },
+        { "value": "outline", "label": "t:flexora.button_outline" },
+        { "value": "ghost", "label": "t:flexora.button_ghost" }
+      ],
+      "default": "ghost"
+    },
+    { "type": "checkbox", "id": "enable_mobile_scroll", "label": "t:sections.flexora_collection_cards.settings.enable_mobile_scroll.label", "default": true },
+    { "type": "checkbox", "id": "show_arrows", "label": "t:sections.flexora_collection_cards.settings.show_arrows.label", "default": true },
+    { "type": "checkbox", "id": "show_view_all", "label": "t:sections.flexora_collection_cards.settings.show_view_all.label", "default": false },
+    { "type": "text", "id": "view_all_label", "label": "t:sections.flexora_collection_cards.settings.view_all_label.label", "default": "عرض الكل" },
+    { "type": "url", "id": "view_all_link", "label": "t:sections.flexora_collection_cards.settings.view_all_link.label" },
+    {
+      "type": "select",
+      "id": "section_spacing",
+      "label": "t:sections.flexora_collection_cards.settings.section_spacing.label",
+      "options": [
+        { "value": "small", "label": "t:sections.flexora_collection_cards.options.spacing.small" },
+        { "value": "medium", "label": "t:sections.flexora_collection_cards.options.spacing.medium" },
+        { "value": "large", "label": "t:sections.flexora_collection_cards.options.spacing.large" }
+      ],
+      "default": "medium"
+    },
+    { "type": "color", "id": "background_color", "label": "t:sections.flexora_collection_cards.settings.background_color.label", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "t:sections.flexora_collection_cards.settings.text_color.label", "default": "#1F2933" }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "t:sections.flexora_collection_cards.blocks.collection_card.name",
+      "limit": 12,
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "t:sections.flexora_collection_cards.blocks.collection_card.settings.collection.label" },
+        { "type": "image_picker", "id": "custom_image", "label": "t:sections.flexora_collection_cards.blocks.collection_card.settings.custom_image.label" },
+        { "type": "text", "id": "custom_title", "label": "t:sections.flexora_collection_cards.blocks.collection_card.settings.custom_title.label" },
+        { "type": "textarea", "id": "custom_text", "label": "t:sections.flexora_collection_cards.blocks.collection_card.settings.custom_text.label" },
+        { "type": "url", "id": "custom_link", "label": "t:sections.flexora_collection_cards.blocks.collection_card.settings.custom_link.label" },
+        { "type": "text", "id": "badge_text", "label": "t:sections.flexora_collection_cards.blocks.collection_card.settings.badge_text.label" },
+        { "type": "text", "id": "button_label", "label": "t:sections.flexora_collection_cards.blocks.collection_card.settings.button_label.label" },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "t:sections.flexora_collection_cards.blocks.collection_card.settings.image_position.label",
+          "options": [
+            { "value": "center", "label": "t:sections.flexora_collection_cards.options.image_position.center" },
+            { "value": "top", "label": "t:sections.flexora_collection_cards.options.image_position.top" },
+            { "value": "bottom", "label": "t:sections.flexora_collection_cards.options.image_position.bottom" }
+          ],
+          "default": "center"
+        },
+        { "type": "checkbox", "id": "featured", "label": "t:sections.flexora_collection_cards.blocks.collection_card.settings.featured.label", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.flexora_collection_cards.name",
+      "settings": {
+        "heading": "تسوق حسب التصنيف",
+        "text": "<p>استعرض أقسام المتجر واختر ما يناسبك بسهولة.</p>"
+      },
+      "blocks": [
+        { "type": "collection_card", "settings": { "custom_title": "ملابس طبية", "custom_text": "خيارات عملية ومريحة للاستخدام اليومي." } },
+        { "type": "collection_card", "settings": { "custom_title": "أزياء يومية", "custom_text": "تصاميم مرنة تناسب أسلوبك." } },
+        { "type": "collection_card", "settings": { "custom_title": "إكسسوارات", "custom_text": "تفاصيل مختارة تكمل إطلالتك." } },
+        { "type": "collection_card", "settings": { "custom_title": "عروض مميزة", "custom_text": "اكتشف اختيارات وقيمًا مميزة." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

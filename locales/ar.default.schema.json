@@ -1,0 +1,564 @@
+{
+  "general": {
+    "404": "غير موجود",
+    "article": "مقال",
+    "block": "كتلة",
+    "blog": "المدونة",
+    "cart": "سلة التسوق",
+    "collection": "مجموعة",
+    "collections": "المجموعات",
+    "collection_card": "بطاقة مجموعة",
+    "collections_grid": "شبكة المجموعات",
+    "colors": "الألوان",
+    "column": "عمود",
+    "content": "المحتوى",
+    "custom_section": "قسم مخصص",
+    "fonts": "الخطوط",
+    "footer": "التذييل",
+    "group": "مجموعة",
+    "header": "الرأس",
+    "layout": "التخطيط",
+    "main": "رئيسي",
+    "page": "صفحة",
+    "password": "كلمة المرور",
+    "primary": "أساسي",
+    "product": "منتج",
+    "row": "صف",
+    "search": "البحث",
+    "secondary": "ثانوي",
+    "section": "قسم",
+    "settings": "الإعدادات",
+    "sidebar": "الشريط الجانبي",
+    "text": "نص",
+    "theme": "القالب",
+    "typography": "الخطوط والنصوص"
+  },
+  "labels": {
+    "alignment": "المحاذاة",
+    "background": "الخلفية",
+    "foreground": "المقدمة",
+    "grid_gap": "تباعد الشبكة",
+    "grid_item_width": "عرض عنصر الشبكة",
+    "input_corner_radius": "استدارة حقول الإدخال",
+    "layout_direction": "اتجاه التخطيط",
+    "menu": "القائمة",
+    "customer_account_menu": "قائمة حساب العميل",
+    "padding": "الحشو",
+    "page_margin": "هامش الصفحة",
+    "page_width": "عرض الصفحة",
+    "show_payment_icons": "إظهار رموز الدفع",
+    "text_style": "نمط النص",
+    "text": "النص"
+  },
+  "options": {
+    "alignment": {
+      "left": "يسار",
+      "center": "وسط",
+      "right": "يمين"
+    },
+    "direction": {
+      "horizontal": "أفقي",
+      "vertical": "عمودي"
+    },
+    "page_width": {
+      "narrow": "ضيق",
+      "wide": "واسع"
+    },
+    "size": {
+      "large": "كبير",
+      "small": "صغير"
+    },
+    "text_style": {
+      "title": "عنوان",
+      "subtitle": "عنوان فرعي",
+      "normal": "نص عادي"
+    }
+  },
+  "flexora": {
+    "design_system": "نظام تصميم فليكسورا",
+    "colors": "الألوان",
+    "background": "الخلفية",
+    "text": "النص",
+    "heading": "العناوين",
+    "primary": "اللون الأساسي",
+    "secondary": "اللون الثانوي",
+    "accent": "اللون المميز",
+    "border": "الحدود",
+    "layout": "التخطيط",
+    "page_width": "عرض الصفحة",
+    "width_compact": "مضغوط",
+    "width_standard": "قياسي",
+    "width_wide": "واسع",
+    "section_spacing_desktop": "تباعد الأقسام على سطح المكتب",
+    "section_spacing_mobile": "تباعد الأقسام على الجوال",
+    "style": "النمط",
+    "radius_small": "استدارة صغيرة",
+    "radius_medium": "استدارة متوسطة",
+    "radius_large": "استدارة كبيرة",
+    "enable_shadows": "تفعيل الظلال",
+    "animation_level": "مستوى الحركة",
+    "animation_none": "بدون",
+    "animation_subtle": "خفيف",
+    "animation_standard": "قياسي",
+    "ui_primitives": "عناصر واجهة المستخدم",
+    "button_radius": "استدارة أزرار",
+    "button_style": "نمط الأزرار الافتراضي",
+    "button_primary": "أساسي",
+    "button_secondary": "ثانوي",
+    "button_outline": "بإطار",
+    "button_ghost": "شفاف",
+    "card_style": "نمط البطاقات الافتراضي",
+    "card_soft": "ناعم",
+    "card_bordered": "بحدود",
+    "card_shadow": "بظل",
+    "focus_style": "لون إطار التركيز",
+    "focus_accent": "مميز",
+    "focus_primary": "أساسي",
+    "focus_dark": "داكن"
+  },
+  "sections": {
+    "flexora_announcement_bar": {
+      "name": "شريط إعلانات فليكسورا",
+      "settings": {
+        "enabled": {
+          "label": "تفعيل شريط الإعلانات"
+        },
+        "text": {
+          "label": "نص الإعلان"
+        },
+        "secondary_text": {
+          "label": "نص الإعلان الثانوي",
+          "info": "محجوز لخيار تدوير الإعلانات في إصدار لاحق."
+        },
+        "link": {
+          "label": "الرابط"
+        },
+        "alignment": {
+          "label": "المحاذاة"
+        },
+        "text_size": {
+          "label": "حجم النص"
+        },
+        "background_color": {
+          "label": "لون الخلفية"
+        },
+        "text_color": {
+          "label": "لون النص"
+        },
+        "show_mobile": {
+          "label": "إظهار على الجوال"
+        },
+        "show_desktop": {
+          "label": "إظهار على سطح المكتب"
+        },
+        "show_close": {
+          "label": "إظهار زر الإغلاق"
+        }
+      },
+      "options": {
+        "alignment": {
+          "start": "البداية",
+          "center": "الوسط",
+          "end": "النهاية"
+        },
+        "text_size": {
+          "small": "صغير",
+          "medium": "متوسط"
+        }
+      }
+    },
+    "flexora_header": {
+      "name": "رأس فليكسورا",
+      "settings": {
+        "logo": {
+          "label": "الشعار"
+        },
+        "logo_width": {
+          "label": "عرض الشعار"
+        },
+        "main_menu": {
+          "label": "القائمة الرئيسية"
+        },
+        "layout": {
+          "label": "تخطيط الرأس"
+        },
+        "sticky": {
+          "label": "الرأس الثابت"
+        },
+        "show_search": {
+          "label": "إظهار البحث"
+        },
+        "show_account": {
+          "label": "إظهار الحساب"
+        },
+        "show_cart_count": {
+          "label": "إظهار عدد عناصر السلة"
+        },
+        "show_language_selector": {
+          "label": "إظهار محدد اللغة"
+        },
+        "enable_transparent_header": {
+          "label": "تفعيل الرأس الشفاف"
+        },
+        "background_color": {
+          "label": "لون الخلفية"
+        },
+        "text_color": {
+          "label": "لون النص"
+        },
+        "show_border": {
+          "label": "إظهار الحد السفلي"
+        }
+      },
+      "options": {
+        "layout": {
+          "logo_start_menu_center": "الشعار في البداية والقائمة في الوسط",
+          "logo_center_menu_start": "الشعار في الوسط والقائمة في البداية",
+          "logo_center_menu_below": "الشعار في الوسط والقائمة أسفله"
+        },
+        "sticky": {
+          "none": "بدون",
+          "on_scroll_up": "عند التمرير للأعلى",
+          "always": "دائمًا"
+        }
+      }
+    },
+    "flexora_footer": {
+      "name": "تذييل فليكسورا",
+      "settings": {
+        "logo": {
+          "label": "الشعار"
+        },
+        "logo_width": {
+          "label": "عرض الشعار"
+        },
+        "description": {
+          "label": "الوصف"
+        },
+        "menu": {
+          "label": "قائمة التذييل"
+        },
+        "secondary_menu": {
+          "label": "القائمة الثانوية"
+        },
+        "show_social": {
+          "label": "إظهار روابط التواصل الاجتماعي"
+        },
+        "show_newsletter": {
+          "label": "إظهار النشرة البريدية"
+        },
+        "show_payment_icons": {
+          "label": "إظهار رموز الدفع"
+        },
+        "show_language_selector": {
+          "label": "إظهار محدد اللغة"
+        },
+        "show_country_selector": {
+          "label": "إظهار محدد الدولة"
+        },
+        "show_copyright": {
+          "label": "إظهار حقوق النشر"
+        },
+        "custom_copyright": {
+          "label": "نص حقوق نشر مخصص"
+        },
+        "layout": {
+          "label": "تخطيط التذييل"
+        },
+        "background_color": {
+          "label": "لون الخلفية"
+        },
+        "text_color": {
+          "label": "لون النص"
+        },
+        "show_border": {
+          "label": "إظهار الحد العلوي"
+        },
+        "mobile_accordion": {
+          "label": "استخدام قوائم قابلة للطي على الجوال"
+        }
+      },
+      "options": {
+        "layout": {
+          "simple": "بسيط",
+          "columns": "أعمدة",
+          "newsletter_first": "النشرة البريدية أولًا"
+        }
+      }
+    },
+    "flexora_hero": {
+      "name": "واجهة فليكسورا الرئيسية",
+      "settings": {
+        "section_height": {
+          "label": "ارتفاع القسم",
+          "options": {
+            "small": "صغير",
+            "medium": "متوسط",
+            "large": "كبير",
+            "fullscreen": "ملء الشاشة"
+          }
+        },
+        "desktop_content_position": { "label": "موضع المحتوى على سطح المكتب" },
+        "mobile_content_position": { "label": "موضع المحتوى على الجوال" },
+        "content_width": { "label": "عرض المحتوى" },
+        "text_alignment": { "label": "محاذاة النص" },
+        "overlay_opacity": { "label": "شفافية الطبقة" },
+        "text_color": { "label": "لون النص" },
+        "overlay_color": { "label": "لون الطبقة" },
+        "button_style": { "label": "نمط الزر الأساسي" },
+        "enable_autoplay": { "label": "تفعيل التشغيل التلقائي" },
+        "autoplay_speed": { "label": "سرعة التشغيل التلقائي" },
+        "show_arrows": { "label": "إظهار الأسهم" },
+        "show_dots": { "label": "إظهار نقاط التنقل" },
+        "pause_on_hover": { "label": "الإيقاف عند تمرير المؤشر" },
+        "enable_parallax": { "label": "تفعيل حركة العمق الخفيفة" },
+        "mobile_stack_content": { "label": "وضع المحتوى أسفل الصورة على الجوال" },
+        "show_scroll_indicator": { "label": "إظهار مؤشر التمرير" }
+      },
+      "options": {
+        "position": {
+          "inherit": "استخدام إعداد القسم",
+          "start": "البداية",
+          "center": "الوسط",
+          "end": "النهاية"
+        },
+        "content_width": {
+          "narrow": "ضيق",
+          "medium": "متوسط",
+          "wide": "واسع"
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "شريحة",
+          "settings": {
+            "image": { "label": "صورة سطح المكتب" },
+            "mobile_image": { "label": "صورة الجوال" },
+            "eyebrow": { "label": "النص التمهيدي" },
+            "heading": { "label": "العنوان" },
+            "text": { "label": "النص" },
+            "primary_button_label": { "label": "نص الزر الأساسي" },
+            "primary_button_link": { "label": "رابط الزر الأساسي" },
+            "secondary_button_label": { "label": "نص الزر الثانوي" },
+            "secondary_button_link": { "label": "رابط الزر الثانوي" },
+            "badge_text": { "label": "نص الشارة" },
+            "content_position": { "label": "موضع المحتوى" },
+            "text_color": { "label": "تجاوز لون النص" },
+            "overlay_opacity": { "label": "تجاوز شفافية الطبقة" }
+          }
+        }
+      }
+    },
+    "flexora_collection_cards": {
+      "name": "بطاقات مجموعات فليكسورا",
+      "settings": {
+        "eyebrow": { "label": "النص التمهيدي" },
+        "heading": { "label": "العنوان" },
+        "text": { "label": "النص" },
+        "heading_alignment": { "label": "محاذاة العنوان" },
+        "layout": {
+          "label": "التخطيط",
+          "options": {
+            "grid": "شبكة",
+            "carousel": "شريط تمرير",
+            "masonry_like": "شبكة مميزة"
+          }
+        },
+        "cards_per_row_desktop": { "label": "البطاقات في الصف على سطح المكتب" },
+        "cards_per_row_tablet": { "label": "البطاقات في الصف على الجهاز اللوحي" },
+        "cards_per_row_mobile": { "label": "البطاقات في الصف على الجوال" },
+        "image_ratio": {
+          "label": "نسبة الصورة",
+          "options": {
+            "square": "مربع",
+            "portrait": "عمودي",
+            "landscape": "أفقي",
+            "wide": "عريض",
+            "natural": "طبيعي"
+          }
+        },
+        "card_style": {
+          "label": "نمط البطاقة",
+          "options": {
+            "soft": "ناعم",
+            "bordered": "بحدود",
+            "shadow": "بظل",
+            "overlay": "نص فوق الصورة",
+            "minimal": "بسيط"
+          }
+        },
+        "text_position": {
+          "label": "موضع النص",
+          "options": {
+            "below_image": "أسفل الصورة",
+            "overlay_start": "فوق الصورة عند البداية",
+            "overlay_center": "فوق الصورة في الوسط",
+            "overlay_end": "فوق الصورة عند النهاية"
+          }
+        },
+        "show_collection_count": { "label": "إظهار عدد المنتجات" },
+        "show_button": { "label": "إظهار زر البطاقة" },
+        "button_label": { "label": "نص زر البطاقة الافتراضي" },
+        "button_style": { "label": "نمط زر البطاقة" },
+        "enable_mobile_scroll": { "label": "تفعيل التمرير الأفقي على الجوال" },
+        "show_arrows": { "label": "إظهار أسهم التنقل" },
+        "show_view_all": { "label": "إظهار زر عرض الكل" },
+        "view_all_label": { "label": "نص زر عرض الكل" },
+        "view_all_link": { "label": "رابط عرض الكل" },
+        "section_spacing": { "label": "تباعد القسم" },
+        "background_color": { "label": "لون الخلفية" },
+        "text_color": { "label": "لون النص" }
+      },
+      "options": {
+        "position": {
+          "start": "البداية",
+          "center": "الوسط",
+          "end": "النهاية"
+        },
+        "spacing": {
+          "small": "صغير",
+          "medium": "متوسط",
+          "large": "كبير"
+        },
+        "image_position": {
+          "center": "الوسط",
+          "top": "الأعلى",
+          "bottom": "الأسفل"
+        }
+      },
+      "blocks": {
+        "collection_card": {
+          "name": "بطاقة مجموعة",
+          "settings": {
+            "collection": { "label": "المجموعة" },
+            "custom_image": { "label": "صورة مخصصة" },
+            "custom_title": { "label": "عنوان مخصص" },
+            "custom_text": { "label": "نص مخصص" },
+            "custom_link": { "label": "رابط مخصص" },
+            "badge_text": { "label": "نص الشارة" },
+            "button_label": { "label": "نص الزر" },
+            "image_position": { "label": "موضع الصورة" },
+            "featured": { "label": "تمييز هذه البطاقة" }
+          }
+        }
+      }
+    },
+    "flexora_featured_collection": {
+      "name": "مجموعة فليكسورا المميزة",
+      "settings": {
+        "collection": { "label": "المجموعة" },
+        "eyebrow": { "label": "النص التمهيدي" },
+        "heading": { "label": "العنوان" },
+        "text": { "label": "النص" },
+        "heading_alignment": { "label": "محاذاة العنوان" },
+        "layout": {
+          "label": "التخطيط",
+          "options": {
+            "grid": "شبكة",
+            "carousel": "شريط تمرير"
+          }
+        },
+        "products_to_show": { "label": "عدد المنتجات المعروضة" },
+        "columns_desktop": { "label": "الأعمدة على سطح المكتب" },
+        "columns_tablet": { "label": "الأعمدة على الجهاز اللوحي" },
+        "columns_mobile": { "label": "الأعمدة على الجوال" },
+        "image_ratio": { "label": "نسبة الصورة" },
+        "card_style": { "label": "نمط البطاقة" },
+        "show_vendor": { "label": "إظهار العلامة التجارية" },
+        "show_price": { "label": "إظهار السعر" },
+        "show_badges": { "label": "إظهار الشارات" },
+        "show_secondary_image": { "label": "إظهار الصورة الثانوية" },
+        "show_quick_add": { "label": "إظهار الإضافة السريعة" },
+        "show_swatches": { "label": "إظهار مؤشرات الألوان" },
+        "show_view_all": { "label": "إظهار زر عرض الكل" },
+        "view_all_label": { "label": "نص زر عرض الكل" },
+        "button_style": { "label": "نمط الزر" },
+        "enable_mobile_scroll": { "label": "تفعيل التمرير الأفقي على الجوال" },
+        "show_arrows": { "label": "إظهار أسهم شريط التمرير" },
+        "section_spacing": { "label": "تباعد القسم" },
+        "background_color": { "label": "لون الخلفية" },
+        "text_color": { "label": "لون النص" }
+      },
+      "options": {
+        "position": {
+          "start": "البداية",
+          "center": "الوسط",
+          "end": "النهاية"
+        },
+        "image_ratio": {
+          "square": "مربع",
+          "portrait": "عمودي",
+          "landscape": "أفقي",
+          "natural": "طبيعي"
+        },
+        "card_style": {
+          "soft": "ناعم",
+          "bordered": "بحدود",
+          "shadow": "بظل",
+          "minimal": "بسيط"
+        },
+        "button_style": {
+          "primary": "أساسي",
+          "secondary": "ثانوي",
+          "outline": "بإطار",
+          "ghost": "شفاف"
+        },
+        "spacing": {
+          "small": "صغير",
+          "medium": "متوسط",
+          "large": "كبير"
+        }
+      }
+    }
+  },
+  "settings": {
+    "flexora_social": {
+      "name": "التواصل الاجتماعي في فليكسورا",
+      "facebook": {
+        "label": "رابط فيسبوك"
+      },
+      "instagram": {
+        "label": "رابط إنستغرام"
+      },
+      "tiktok": {
+        "label": "رابط تيك توك"
+      },
+      "x": {
+        "label": "رابط إكس"
+      },
+      "youtube": {
+        "label": "رابط يوتيوب"
+      },
+      "snapchat": {
+        "label": "رابط سناب شات"
+      },
+      "pinterest": {
+        "label": "رابط بنترست"
+      },
+      "linkedin": {
+        "label": "رابط لينكدإن"
+      },
+      "whatsapp": {
+        "label": "رابط واتساب"
+      }
+    },
+    "flexora_newsletter": {
+      "name": "النشرة البريدية في فليكسورا",
+      "enabled": {
+        "label": "تفعيل النشرة البريدية"
+      },
+      "heading": {
+        "label": "العنوان"
+      },
+      "text": {
+        "label": "النص"
+      },
+      "button_label": {
+        "label": "نص الزر"
+      },
+      "success_message": {
+        "label": "رسالة النجاح"
+      }
+    }
+  }
+}

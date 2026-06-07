@@ -1,0 +1,138 @@
+{
+  "404": {
+    "title": "404",
+    "not_found": "Page not found.",
+    "back_to_shopping": "Back to shopping"
+  },
+  "blog": {
+    "article_comments": "Comments",
+    "article_metadata_html": "{{ date }} by {{ author }}",
+    "comment_form_body": "Comment",
+    "comment_form_email": "Email",
+    "comment_form_name": "Name",
+    "comment_form_submit": "Post",
+    "comment_form_title": "Add a comment"
+  },
+  "cart": {
+    "checkout": "Checkout",
+    "title": "Cart",
+    "update": "Update",
+    "remove": "Remove"
+  },
+  "customers": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "title": "Login"
+    }
+  },
+  "collections": {
+    "title": "Collections"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Add to Apple Wallet",
+    "card": "Gift card",
+    "expired": "This gift card has expired",
+    "expires_on": "Expires on {{ expires_on }}",
+    "use_at_checkout": "Use this gift card at checkout"
+  },
+  "password": {
+    "title": "This shop is private",
+    "password": "Password",
+    "enter": "Enter"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search articles, pages, or products",
+    "submit": "Search",
+    "no_results_html": "No results found for {{ terms }}",
+    "results_for_html": "{{ count }} results found for {{ terms }}"
+  },
+  "flexora": {
+    "header": {
+      "search": "Search",
+      "account": "Account",
+      "cart": "Cart",
+      "menu": "Menu",
+      "open_menu": "Open menu",
+      "close_menu": "Close menu",
+      "cart_count": "Cart, {{ count }} items",
+      "language": "Language"
+    },
+    "announcement": {
+      "label": "Announcement",
+      "close": "Close announcement"
+    },
+    "footer": {
+      "menu": "Footer menu",
+      "secondary_menu": "Secondary footer menu",
+      "newsletter": "Newsletter",
+      "email": "Email address",
+      "email_placeholder": "Enter your email address",
+      "subscribe": "Subscribe",
+      "newsletter_success": "Thanks for subscribing.",
+      "newsletter_error": "Please check your email address and try again.",
+      "social_links": "Social links",
+      "payment_methods": "Payment methods",
+      "copyright": "Copyright",
+      "language": "Language",
+      "country": "Country or region"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "x": "X",
+      "youtube": "YouTube",
+      "snapchat": "Snapchat",
+      "pinterest": "Pinterest",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp"
+    },
+    "hero": {
+      "label": "Hero slideshow",
+      "previous": "Previous slide",
+      "next": "Next slide",
+      "go_to_slide": "Go to slide {{ number }}",
+      "slide": "Slide",
+      "pause": "Pause slideshow",
+      "play": "Play slideshow",
+      "placeholder_heading": "Add a hero slide",
+      "placeholder_text": "Add at least one slide to display the Flexora hero.",
+      "scroll_down": "Scroll to content"
+    },
+    "collection_cards": {
+      "view_collection": "View collection",
+      "view_all": "View all",
+      "previous": "Previous collections",
+      "next": "Next collections",
+      "placeholder_heading": "Add collection cards",
+      "placeholder_text": "Add at least one collection card to showcase store categories.",
+      "products_count": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      }
+    },
+    "product_card": {
+      "sale": "Sale",
+      "sold_out": "Sold out",
+      "quick_add": "Add to cart",
+      "choose_options": "Choose options",
+      "view_product": "View {{ title }}",
+      "vendor": "Vendor",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "compare_at_price": "Original price",
+      "placeholder_title": "Example product"
+    },
+    "featured_collection": {
+      "view_all": "View all",
+      "previous": "Previous products",
+      "next": "Next products",
+      "placeholder_heading": "Select a collection",
+      "placeholder_text": "Choose a collection in the Theme Editor to display its products.",
+      "empty": "This collection does not contain any products yet."
+    }
+  }
+}

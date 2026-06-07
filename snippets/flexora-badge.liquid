@@ -1,0 +1,24 @@
+{% doc %}
+  Renders a reusable Flexora badge.
+
+  @param {string} label - Badge label
+  @param {string} [type] - sale, new, sold-out, success, warning, or neutral
+  @param {string} [classes] - Additional CSS classes
+
+  @example
+  {% render 'flexora-badge', label: 'New', type: 'new' %}
+{% enddoc %}
+
+{%- liquid
+  assign badge_type = type | default: 'neutral'
+  assign allowed_types = 'sale,new,sold-out,success,warning,neutral' | split: ','
+  unless allowed_types contains badge_type
+    assign badge_type = 'neutral'
+  endunless
+-%}
+
+{% if label != blank %}
+  <span class="fx-badge fx-badge--{{ badge_type }}{% if classes != blank %} {{ classes | escape }}{% endif %}">
+    {{ label | escape }}
+  </span>
+{% endif %}
